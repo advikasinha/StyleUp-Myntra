@@ -1,13 +1,16 @@
 import streamlit as st
 import torch
-from torchvision import models, transforms
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
 from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-import torch.nn as nn
-import torch.optim as optim
-import copy
+import torchvision.transforms as transforms
+import torchvision.models as models #for VGG or ResNet, transfer learning
+
+import copy #creates shallows and deep copies of objects in Python
 
 # Load custom CSS
 def load_css():
@@ -19,6 +22,7 @@ load_css()
 
 # Set device for PyTorch
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+imsize = 512 if torch.cuda.is_available() else 128
 
 # Load the pre-trained VGG19 model
 cnn = models.vgg19(pretrained=True).features.to(device).eval()
