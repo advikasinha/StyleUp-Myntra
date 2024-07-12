@@ -80,7 +80,11 @@ class Normalization(nn.Module):
         self.std = torch.tensor(std).view(-1, 1, 1).to(device)
 
     def forward(self, img):
+        print("Input image shape:", img.shape)
+        print("Mean shape:", self.mean.shape)
+        print("Std shape:", self.std.shape)
         return (img - self.mean) / self.std
+
 
 # Function to get model and losses
 def get_model_and_losses(cnn, normalization_mean, normalization_std,
