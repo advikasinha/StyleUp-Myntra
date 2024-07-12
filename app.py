@@ -174,5 +174,9 @@ if content_image and style_image:
     input_img = content_img.clone()
     output_img = run_style_transfer(cnn, cnn_normalization_mean, cnn_normalization_std, content_img, style_img, input_img)
 
-    # Display output
-    st.image(output_img.cpu().detach().squeeze(0), caption='Output Image', use_column_width=True)
+# Convert tensor to PIL image
+    output_image = output_img.cpu().detach().squeeze(0)
+    output_image = transforms.ToPILImage()(output_image)
+
+# Display output
+    st.image(output_image, caption='Output Image', use_column_width=True)
