@@ -54,11 +54,7 @@ def main():
     """, unsafe_allow_html=True)
 
     st.markdown('<div class="content">', unsafe_allow_html=True)
-
     col1, col2 = st.columns([1, 2])
-
-    content_file = None
-    style_file = None
 
     with col1:
         st.markdown('<div class="sidebar">', unsafe_allow_html=True)
@@ -92,4 +88,5 @@ def main():
     st.markdown('</div>', unsafe_allow_html=True)
 
 if __name__ == "__main__":
+
     main()
