@@ -5,54 +5,44 @@ import torch.nn.functional as F
 import torch.optim as optim
 from PIL import Image
 import matplotlib.pyplot as plt
+import torchvision.transforms as transforms
+import torchvision.models as models
+import copy
 import numpy as np
 import os
-import torchvision.transforms as transforms
-import torchvision.models as models #for VGG or ResNet, transfer learning
 
-import copy #creates shallows and deep copies of objects in Python
-
-# Load custom CSS
-def load_css():
-    with open("styles.css") as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-load_css()
-
-
-# Set device for PyTorch
+# Set device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# Image size
 imsize = 512 if torch.cuda.is_available() else 128
 
-# Load the pre-trained VGG19 model
-cnn = models.vgg19(pretrained=True).features.to(device).eval()
-
-# Normalization constants
-cnn_normalization_mean = torch.tensor([0.485, 0.456, 0.406]).to(device)
-cnn_normalization_std = torch.tensor([0.229, 0.224, 0.225]).to(device)
-
-# Function to load images
+# Load an image and preprocess
 def load_image(image_path, size):
-    image = Image.open(image_path).convert("RGB")  # Ensure it's in RGB format
+    image = Image.open(image_path)
     transform = transforms.Compose([
         transforms.Resize(size),
         transforms.ToTensor()
     ])
     image = transform(image).unsqueeze(0)
-    print("Loaded image shape:", image.shape)  # Debugging print
     return image.to(device, torch.float)
 
-
+# Dynamic load images
 def dynamic_load_images(content_path, style_path, size):
     content_img = load_image(content_path, size)
     style_img = load_image(style_path, [content_img.size(2), content_img.size(3)])
-    print("Content image type:", type(content_img))  # Check type
-    print("Style image type:", type(style_img))      # Check type
     assert style_img.size() == content_img.size(), "Style and content images must be of the same size"
     return content_img, style_img
 
+# Show image
+def show_image(tensor):
+    image = tensor.cpu().clone().squeeze(0)
+    image = transforms.ToPILImage()(image)
+    plt.imshow(image)
+    plt.axis('off')
+    plt.show()
 
-# Define content and style loss classes
+# Content Loss
 class ContentLoss(nn.Module):
     def __init__(self, target, weight=1.0):
         super(ContentLoss, self).__init__()
@@ -63,12 +53,14 @@ class ContentLoss(nn.Module):
         self.loss = self.weight * F.mse_loss(input, self.target)
         return input
 
+# Gram Matrix for Style Loss
 def gram_matrix(input):
     batch_size, num_channels, height, width = input.size()
     features = input.view(batch_size * num_channels, height * width)
     G = torch.mm(features, features.t())
     return G.div(batch_size * num_channels * height * width)
 
+# Style Loss
 class StyleLoss(nn.Module):
     def __init__(self, target_feature):
         super(StyleLoss, self).__init__()
@@ -79,7 +71,7 @@ class StyleLoss(nn.Module):
         self.loss = F.mse_loss(G, self.target)
         return input
 
-# Normalization class
+# Normalization Layer
 class Normalization(nn.Module):
     def __init__(self, mean, std):
         super(Normalization, self).__init__()
@@ -87,17 +79,10 @@ class Normalization(nn.Module):
         self.std = torch.tensor(std).view(-1, 1, 1).to(device)
 
     def forward(self, img):
-        print("Input image shape:", img.shape)
-        print("Mean shape:", self.mean.shape)
-        print("Std shape:", self.std.shape)
         return (img - self.mean) / self.std
 
-
-# Function to get model and losses
-def get_model_and_losses(cnn, normalization_mean, normalization_std,
-                         style_img, content_img,
-                         content_layers=['conv_4'],
-                         style_layers=['conv_1', 'conv_2', 'conv_3', 'conv_4', 'conv_5']):
+# Get model and losses
+def get_model_and_losses(cnn, normalization_mean, normalization_std, style_img, content_img):
     cnn = copy.deepcopy(cnn)
     normalization = Normalization(normalization_mean, normalization_std).to(device)
     content_losses = []
@@ -121,13 +106,13 @@ def get_model_and_losses(cnn, normalization_mean, normalization_std,
 
         model.add_module(name, layer)
 
-        if name in content_layers:
+        if name in ['conv_4']:  # Content layer
             target = model(content_img).detach()
             content_loss = ContentLoss(target)
             model.add_module(f"content_loss_{i}", content_loss)
             content_losses.append(content_loss)
 
-        if name in style_layers:
+        if name in ['conv_1', 'conv_2', 'conv_3', 'conv_4', 'conv_5']:  # Style layers
             target_feature = model(style_img).detach()
             style_loss = StyleLoss(target_feature)
             model.add_module(f"style_loss_{i}", style_loss)
@@ -140,19 +125,17 @@ def get_model_and_losses(cnn, normalization_mean, normalization_std,
     model = model[:(i + 1)]
     return model, style_losses, content_losses
 
-# Function to get optimizer
+# Get input optimizer
 def get_input_optimizer(input_img):
     optimizer = optim.LBFGS([input_img.requires_grad_()])
     return optimizer
 
-# Function to run style transfer
-def run_style_transfer(cnn, normalization_mean, normalization_std,
-                       content_img, style_img, input_img, num_steps=300,
-                       style_weight=1000000, content_weight=1):
+# Run style transfer
+def run_style_transfer(cnn, normalization_mean, normalization_std, content_img, style_img, input_img, num_steps=300, style_weight=1000000, content_weight=1):
     model, style_losses, content_losses = get_model_and_losses(cnn, normalization_mean, normalization_std, style_img, content_img)
     optimizer = get_input_optimizer(input_img)
 
-    run = [-200]
+    run = [0]
     while run[0] <= num_steps:
         def closure():
             input_img.data.clamp_(0, 1)
@@ -168,9 +151,6 @@ def run_style_transfer(cnn, normalization_mean, normalization_std,
             loss.backward()
 
             run[0] += 1
-            if run[0] % 50 == 0:
-                st.write(f"run {run[0]}: Style Loss : {style_score.item()} Content Loss: {content_score.item()}")
-
             return style_score + content_score
 
         optimizer.step(closure)
@@ -178,26 +158,21 @@ def run_style_transfer(cnn, normalization_mean, normalization_std,
     input_img.data.clamp_(0, 1)
     return input_img
 
-# Streamlit layout
-st.title("DesignerHub")
-st.markdown("Welcome to DesignerHub! Upload your content and style images for a unique style transfer experience.")
-
-content_image = st.file_uploader("Upload Content Image", type=["jpg", "jpeg", "png"])
-style_image = st.file_uploader("Upload Style Image", type=["jpg", "jpeg", "png"])
+# Streamlit UI
+st.title("DesignerHub - Style Transfer")
+content_image = st.file_uploader("Upload Content Image", type=["jpg", "png"])
+style_image = st.file_uploader("Upload Style Image", type=["jpg", "png"])
 
 if content_image and style_image:
-    content_img = load_image(content_image)
-    style_img = load_image(style_image)
+    content_img, style_img = dynamic_load_images(content_image, style_image, imsize)
 
-    st.image(content_img, caption="Content Image", use_column_width=True)
-    st.image(style_img, caption="Style Image", use_column_width=True)
+    # Initialize CNN
+    cnn = models.vgg19(pretrained=True).features.to(device).eval()
+    cnn_normalization_mean = [0.485, 0.456, 0.406]
+    cnn_normalization_std = [0.229, 0.224, 0.225]
 
-    if st.button("Run Style Transfer"):
-        input_img = transform_image(content_img)
-        output_img = run_style_transfer(cnn, cnn_normalization_mean, cnn_normalization_std,
-                                 content_img, style_img, input_img, 
-                                 num_steps=300, style_weight=1000000, content_weight=1)
+    input_img = content_img.clone()
+    output_img = run_style_transfer(cnn, cnn_normalization_mean, cnn_normalization_std, content_img, style_img, input_img)
 
-
-        output_image = transforms.ToPILImage()(output_img.squeeze(0).cpu())
-        st.image(output_image, caption="Output Image", use_column_width=True)
+    # Display output
+    st.image(output_img.cpu().detach().squeeze(0), caption='Output Image', use_column_width=True)
