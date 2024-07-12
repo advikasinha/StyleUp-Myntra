@@ -32,18 +32,25 @@ cnn_normalization_mean = torch.tensor([0.485, 0.456, 0.406]).to(device)
 cnn_normalization_std = torch.tensor([0.229, 0.224, 0.225]).to(device)
 
 # Function to load images
-def load_image(image_file):
-    image = Image.open(image_file)
-    return image
-
-# Function to transform images for the model
-def transform_image(image, size=512):
+def load_image(image_path, size):
+    image = Image.open(image_path).convert("RGB")  # Ensure it's in RGB format
     transform = transforms.Compose([
         transforms.Resize(size),
         transforms.ToTensor()
     ])
     image = transform(image).unsqueeze(0)
+    print("Loaded image shape:", image.shape)  # Debugging print
     return image.to(device, torch.float)
+
+
+def dynamic_load_images(content_path, style_path, size):
+    content_img = load_image(content_path, size)
+    style_img = load_image(style_path, [content_img.size(2), content_img.size(3)])
+    print("Content image type:", type(content_img))  # Check type
+    print("Style image type:", type(style_img))      # Check type
+    assert style_img.size() == content_img.size(), "Style and content images must be of the same size"
+    return content_img, style_img
+
 
 # Define content and style loss classes
 class ContentLoss(nn.Module):
