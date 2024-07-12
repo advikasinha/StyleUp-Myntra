@@ -1,140 +1,95 @@
+import streamlit as st
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
-import torchvision.models as models
-import torchvision.transforms as transforms
-import copy
+from PIL import Image
+import style_transfer
+import utils
 
-class ContentLoss(nn.Module):
-    def __init__(self, target):
-        super(ContentLoss, self).__init__()
-        self.target = target.detach()
+st.set_page_config(page_title="DesignerHub", layout="wide")
 
-    def forward(self, input):
-        self.loss = F.mse_loss(input, self.target)
-        return input
+def main():
+    # Header
+    st.markdown("""
+    <style>
+    .header {
+        padding: 10px 16px;
+        background: #ffffff;
+        color: #f1f1f1;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+    .content {
+        padding: 16px;
+        margin-top: 60px;
+    }
+    .sidebar {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-right: 1px solid #e9e9e9;
+    }
+    .main-content {
+        padding: 20px;
+    }
+    .product-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .button-primary {
+        background-color: #ff3f6c;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-def gram_matrix(input):
-    batch_size, num_channels, height, width = input.size()
-    features = input.view(batch_size * num_channels, height * width)
-    G = torch.mm(features, features.t())
-    return G.div(batch_size * num_channels * height * width)
+    st.markdown("""
+    <div class="header">
+        <h1 style="color: #ff3f6c;">DesignerHub</h1>
+    </div>
+    """, unsafe_allow_html=True)
 
-class StyleLoss(nn.Module):
-    def __init__(self, target_feature):
-        super(StyleLoss, self).__init__()
-        self.target = gram_matrix(target_feature).detach()
+    st.markdown('<div class="content">', unsafe_allow_html=True)
 
-    def forward(self, input):
-        G = gram_matrix(input)
-        self.loss = F.mse_loss(G, self.target)
-        return input
+    col1, col2 = st.columns([1, 2])
 
-class Normalization(nn.Module):
-    def __init__(self, mean, std):
-        super(Normalization, self).__init__()
-        self.mean = mean.clone().detach().view(-1, 1, 1)
-        self.std = std.clone().detach().view(-1, 1, 1)
+    content_file = None
+    style_file = None
 
-    def forward(self, img):
-        return (img - self.mean) / self.std
+    with col1:
+        st.markdown('<div class="sidebar">', unsafe_allow_html=True)
+        st.markdown('<div class="product-title">Style Transfer</div>', unsafe_allow_html=True)
+        content_file = st.file_uploader("Choose a content image", type=["png", "jpg", "jpeg"])
+        style_file = st.file_uploader("Choose a style image", type=["png", "jpg", "jpeg"])
+        st.markdown('</div>', unsafe_allow_html=True)
 
-def get_style_model_and_losses(cnn, normalization_mean, normalization_std,
-                               style_img, content_img,
-                               content_layers=['conv_4'],
-                               style_layers=['conv_1', 'conv_2', 'conv_3', 'conv_4', 'conv_5']):
-    cnn = copy.deepcopy(cnn)
-    normalization = Normalization(normalization_mean, normalization_std).to(style_img.device)
-    
-    content_losses = []
-    style_losses = []
-
-    model = nn.Sequential(normalization)
-
-    i = 0
-    for layer in cnn.children():
-        if isinstance(layer, nn.Conv2d):
-            i += 1
-            name = f'conv_{i}'
-        elif isinstance(layer, nn.ReLU):
-            name = f'relu_{i}'
-            layer = nn.ReLU(inplace=False)
-        elif isinstance(layer, nn.MaxPool2d):
-            name = f'pool_{i}'
-        elif isinstance(layer, nn.BatchNorm2d):
-            name = f'bn_{i}'
+    with col2:
+        st.markdown('<div class="main-content">', unsafe_allow_html=True)
+        if content_file is not None and style_file is not None:
+            col_a, col_b = st.columns(2)
+            with col_a:
+                content_image = Image.open(content_file)
+                st.image(content_image, caption="Content Image", use_column_width=True)
+            with col_b:
+                style_image = Image.open(style_file)
+                st.image(style_image, caption="Style Image", use_column_width=True)
+            
+            if st.button("Generate Styled Image", key="generate_button"):
+                with st.spinner("Generating styled image..."):
+                    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+                    content_img, style_img = utils.load_images(content_file, style_file, device)
+                    output = style_transfer.run_style_transfer(content_img, style_img)
+                    output_pil = utils.tensor_to_pil(output)
+                    st.image(output_pil, caption="Styled Image", use_column_width=True)
         else:
-            raise RuntimeError(f'Unrecognized layer: {layer.__class__.__name__}')
+            st.markdown("Upload both content and style images to see the result.")
+        st.markdown('</div>', unsafe_allow_html=True)
 
-        model.add_module(name, layer)
+    st.markdown('</div>', unsafe_allow_html=True)
 
-        if name in content_layers:
-            target = model(content_img).detach()
-            content_loss = ContentLoss(target)
-            model.add_module(f"content_loss_{i}", content_loss)
-            content_losses.append(content_loss)
-
-        if name in style_layers:
-            target_feature = model(style_img).detach()
-            style_loss = StyleLoss(target_feature)
-            model.add_module(f"style_loss_{i}", style_loss)
-            style_losses.append(style_loss)
-
-    for i in range(len(model) - 1, -1, -1):
-        if isinstance(model[i], ContentLoss) or isinstance(model[i], StyleLoss):
-            break
-
-    model = model[:(i + 1)]
-
-    return model, style_losses, content_losses
-
-def get_input_optimizer(input_img):
-    optimizer = optim.LBFGS([input_img.requires_grad_()])
-    return optimizer
-
-def run_style_transfer(content_img, style_img, num_steps=300,
-                       style_weight=1000000, content_weight=1):
-    device = content_img.device
-    cnn = models.vgg19(pretrained=True).features.to(device).eval()
-    
-    cnn_normalization_mean = torch.tensor([0.485, 0.456, 0.406]).to(device)
-    cnn_normalization_std = torch.tensor([0.229, 0.224, 0.225]).to(device)
-
-    input_img = content_img.clone()
-    
-    model, style_losses, content_losses = get_style_model_and_losses(cnn, cnn_normalization_mean, cnn_normalization_std,
-                                                                     style_img, content_img)
-    optimizer = get_input_optimizer(input_img)
-
-    run = [0]
-    while run[0] <= num_steps:
-        def closure():
-            input_img.data.clamp_(0, 1)
-            optimizer.zero_grad()
-            model(input_img)
-            style_score = 0
-            content_score = 0
-
-            for sl in style_losses:
-                style_score += sl.loss
-            for cl in content_losses:
-                content_score += cl.loss
-
-            style_score *= style_weight
-            content_score *= content_weight
-
-            loss = style_score + content_score
-            loss.backward()
-
-            run[0] += 1
-            if run[0] % 50 == 0:
-                print(f"run {run[0]}:")
-                print(f'Style Loss : {style_score.item()} Content Loss: {content_score.item()}')
-
-            return style_score + content_score
-
-        optimizer.step(closure)
-
-    input_img.data.clamp_(0, 1)
-    return input_img
+if __name__ == "__main__":
+    main()
