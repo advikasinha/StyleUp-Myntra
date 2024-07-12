@@ -178,7 +178,10 @@ if content_image and style_image:
 
     if st.button("Run Style Transfer"):
         input_img = transform_image(content_img)
-        output_img = run_style_transfer(cnn, cnn_normalization_mean, cnn_normalization_std, input_img, style_img)
+        output_img = run_style_transfer(cnn, cnn_normalization_mean, cnn_normalization_std,
+                                 content_img, style_img, input_img, 
+                                 num_steps=300, style_weight=1000000, content_weight=1)
+
 
         output_image = transforms.ToPILImage()(output_img.squeeze(0).cpu())
         st.image(output_image, caption="Output Image", use_column_width=True)
