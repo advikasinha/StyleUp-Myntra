@@ -1,0 +1,28 @@
+/* styles.css */
+body {
+  background-color: #f5f5f5; /* Light gray background */
+}
+
+h1 {
+  font-family: "Arial", sans-serif;
+  color: #c50000; /* Myntra-like red */
+}
+
+h2 {
+  font-family: "Arial", sans-serif;
+  color: #333; /* Dark text */
+}
+
+.stButton button {
+  background-color: #c50000; /* Myntra-like red */
+  color: white;
+}
+
+.stButton button:hover {
+  background-color: #a00000; /* Darker red on hover */
+}
+
+.stImage img {
+  border: 1px solid #ddd; /* Light gray border around images */
+  border-radius: 5px; /* Rounded corners */
+}
