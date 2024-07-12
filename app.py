@@ -5,6 +5,8 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import torch.nn as nn
+import torch.optim as optim
 
 # Load custom CSS
 def load_css():
