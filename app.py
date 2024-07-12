@@ -53,18 +53,12 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-    if content_file is not None and style_file is not None:
-        if st.button("Generate Styled Image", key="generate_button"):
-            with st.spinner("Generating styled image..."):
-                device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-                content_img, style_img = utils.load_images(content_file, style_file, device)
-                output = style_transfer.run_style_transfer(content_img, style_img)
-                output_pil = utils.tensor_to_pil(output)
-                st.image(output_pil, caption="Styled Image", use_column_width=True)
-
     st.markdown('<div class="content">', unsafe_allow_html=True)
 
     col1, col2 = st.columns([1, 2])
+
+    content_file = None
+    style_file = None
 
     with col1:
         st.markdown('<div class="sidebar">', unsafe_allow_html=True)
@@ -89,7 +83,8 @@ def main():
                     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
                     content_img, style_img = utils.load_images(content_file, style_file, device)
                     output = style_transfer.run_style_transfer(content_img, style_img)
-                    st.image(output, caption="Styled Image", use_column_width=True)
+                    output_pil = utils.tensor_to_pil(output)
+                    st.image(output_pil, caption="Styled Image", use_column_width=True)
         else:
             st.markdown("Upload both content and style images to see the result.")
         st.markdown('</div>', unsafe_allow_html=True)
