@@ -171,12 +171,33 @@ if content_image and style_image:
     cnn_normalization_mean = [0.485, 0.456, 0.406]
     cnn_normalization_std = [0.229, 0.224, 0.225]
 
+            # Load content and style images
+    content_img = load_image(content_image_path, imsize)
+    style_img = load_image(style_image_path, imsize)
+
+# Convert to PIL images for display
+    content_image = content_img.cpu().detach().squeeze(0)
+    style_image = style_img.cpu().detach().squeeze(0)
+    content_image = transforms.ToPILImage()(content_image)
+    style_image = transforms.ToPILImage()(style_image)
+
+# Display content and style images
+    st.image(content_image, caption='Content Image', use_column_width=True)
+    st.image(style_image, caption='Style Image', use_column_width=True)
+
+# Prepare input image
     input_img = content_img.clone()
+
+# Run style transfer
     output_img = run_style_transfer(cnn, cnn_normalization_mean, cnn_normalization_std, content_img, style_img, input_img)
 
-# Convert tensor to PIL image
+# Convert output tensor to PIL image
     output_image = output_img.cpu().detach().squeeze(0)
     output_image = transforms.ToPILImage()(output_image)
 
-# Display output
+# Display output image
     st.image(output_image, caption='Output Image', use_column_width=True)
+
+
+    
+
