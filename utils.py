@@ -1,4 +1,4 @@
-def load_image(image_file, size, device):
+def load_images(image_file, size, device):
     image = Image.open(image_file).convert('RGB')
     loader = transforms.Compose([
         transforms.Resize(size),
