@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import torchvision.transforms as transforms
 import torchvision.models as models
 import copy
-import numpy as np
 import os
 
 # Set device
@@ -33,14 +32,6 @@ def dynamic_load_images(content_path, style_path, size):
     style_img = load_image(style_path, [content_img.size(2), content_img.size(3)])
     assert style_img.size() == content_img.size(), "Style and content images must be of the same size"
     return content_img, style_img
-
-# Show image
-def show_image(tensor):
-    image = tensor.cpu().clone().squeeze(0)
-    image = transforms.ToPILImage()(image)
-    plt.imshow(image)
-    plt.axis('off')
-    plt.show()
 
 # Content Loss
 class ContentLoss(nn.Module):
@@ -171,33 +162,25 @@ if content_image and style_image:
     cnn_normalization_mean = [0.485, 0.456, 0.406]
     cnn_normalization_std = [0.229, 0.224, 0.225]
 
-            # Load content and style images
-    content_img = load_image(content_image_path, imsize)
-    style_img = load_image(style_image_path, imsize)
+    # Convert to PIL images for display
+    content_image_display = content_img.cpu().detach().squeeze(0)
+    style_image_display = style_img.cpu().detach().squeeze(0)
+    content_image_display = transforms.ToPILImage()(content_image_display)
+    style_image_display = transforms.ToPILImage()(style_image_display)
 
-# Convert to PIL images for display
-    content_image = content_img.cpu().detach().squeeze(0)
-    style_image = style_img.cpu().detach().squeeze(0)
-    content_image = transforms.ToPILImage()(content_image)
-    style_image = transforms.ToPILImage()(style_image)
+    # Display content and style images
+    st.image(content_image_display, caption='Content Image', use_column_width=True)
+    st.image(style_image_display, caption='Style Image', use_column_width=True)
 
-# Display content and style images
-    st.image(content_image, caption='Content Image', use_column_width=True)
-    st.image(style_image, caption='Style Image', use_column_width=True)
-
-# Prepare input image
+    # Prepare input image
     input_img = content_img.clone()
 
-# Run style transfer
+    # Run style transfer
     output_img = run_style_transfer(cnn, cnn_normalization_mean, cnn_normalization_std, content_img, style_img, input_img)
 
-# Convert output tensor to PIL image
+    # Convert output tensor to PIL image
     output_image = output_img.cpu().detach().squeeze(0)
     output_image = transforms.ToPILImage()(output_image)
 
-# Display output image
+    # Display output image
     st.image(output_image, caption='Output Image', use_column_width=True)
-
-
-    
-
