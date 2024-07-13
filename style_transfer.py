@@ -92,7 +92,7 @@ def get_input_optimizer(input_img):
     optimizer = optim.LBFGS([input_img.requires_grad_()])
     return optimizer
 
-def run_style_transfer(content_img, style_img, num_steps=300,
+def run_style_transfer(content_img, style_img, num_steps=500,
                        style_weight=1000000, content_weight=1):
     device = content_img.device
     cnn = models.vgg19(pretrained=True).features.to(device).eval()

@@ -74,13 +74,15 @@ def main():
                 style_image = Image.open(style_file)
                 st.image(style_image, caption="Style Image", use_column_width=True)
             
-            if st.button("Generate Styled Image", key="generate_button"):
-                with st.spinner("Generating styled image..."):
-                    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-                    content_img, style_img = utils.load_images(content_file, style_file, device)
-                    output = style_transfer.run_style_transfer(content_img, style_img)
-                    output_pil = utils.tensor_to_pil(output)
-                    st.image(output_pil, caption="Styled Image", use_column_width=True)
+        if st.button("Generate Styled Image", key="generate_button"):
+            progress_bar = st.progress(0)
+            with st.spinner("Generating styled image..."):
+                device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+                content_img, style_img = utils.load_images(content_file, style_file, device)
+                output = style_transfer.run_style_transfer(content_img, style_img, num_steps=500)
+                output_pil = utils.tensor_to_pil(output)
+                st.image(output_pil, caption="Styled Image", use_column_width=True)
+            progress_bar.progress(100)
         else:
             st.markdown("Upload both content and style images to see the result.")
         st.markdown('</div>', unsafe_allow_html=True)
