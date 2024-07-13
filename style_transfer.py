@@ -106,7 +106,7 @@ def run_style_transfer(content_img, style_img, num_steps=300,
                                                                style_img, content_img)
     optimizer = get_input_optimizer(input_img)
 
-    run = [0]
+    run = [-200]
     while run[0] <= num_steps:
         def closure():
             input_img.data.clamp_(0, 1)
