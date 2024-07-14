@@ -62,6 +62,7 @@ def main():
     display: block; /* Ensure it's a block element for margin auto to work */
     font-size: 18px; /* Adjust font size */
     cursor: pointer;
+                
 }
 .stButton>button:hover {
     background-color: #FD913C;
@@ -136,17 +137,7 @@ def main():
             st.image(style_file, caption='Uploaded Style', width=image_width)
 
     if content_file and style_file:
-        if st.button("Design It!", key="design_button", help="Click to design your image", 
-             format_func=lambda _: '<style> .stButton button { \
-                background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E); \
-                color: white; \
-                font-weight: bold; \
-                border: none; \
-                border-radius: 25px; \
-                padding: 16px 32px; \
-                font-size: 18px; \
-                cursor: pointer; \
-             } </style>'):
+        if st.button("Design It!", key="design_button", help="Click to design your image"):
             with st.spinner("Designing your image..."):
                 try:
                     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
