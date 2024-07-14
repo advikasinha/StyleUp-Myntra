@@ -91,12 +91,14 @@ def main():
     # Color strip
     st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
 
+    st.markdown('<h3 style="color: #F13AB1; text-align: center; font-size: 28px;">Create Your Own Designs</h2>', unsafe_allow_html=True)
+
     # Lorem Ipsum block
     st.markdown("""
     <div class="lorem-ipsum">
         <p style="font-size: 16px; line-height: 1.6; color: #333;">Welcome to <strong>Designer Hub</strong>, your ultimate playground on Myntra! Designed for both budding designers and fashion enthusiasts, this platform eliminates the need for traditional mockups.</p>
         <p style="font-size: 16px; line-height: 1.6; color: #333;"><strong><em>Create Your Own Design</em></strong> empowers you to unleash your creativity effortlessly. Simply upload your unique silhouette and pair it with a light-colored style photo to watch your ideas come to life in vibrant, personalized fashion statements!</p>
-        <p style="font-size: 16px; line-height: 1.6; color: #29303E; text-align: center;">;">Dive in and let your imagination run wild!</p>
+        <p style="font-size: 16px; line-height: 1.6; color: #29303E; text-align: center;">Dive in and let your imagination run wild!</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -104,6 +106,8 @@ def main():
     # Create Your Own Designs section
     st.write("")
     st.markdown('<h3 style="color: #F13AB1; text-align: center; font-size: 28px;">Create Your Own Designs</h2>', unsafe_allow_html=True)
+
+    st.write("")
 
     # File uploaders
     col1, col2 = st.columns(2)
