@@ -137,7 +137,7 @@ def get_base64_of_bin_file(bin_file):
 
 def main():
     # Get the base64 string of the logo
-    logo_path = "myntra_logo.png"
+    logo_path = "Myntra-Logo.png"
     if os.path.exists(logo_path):
         logo_base64 = get_base64_of_bin_file(logo_path)
     else:
