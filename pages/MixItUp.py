@@ -49,9 +49,7 @@ st.markdown("""
         background-color: #FD913C;
     }
     .stSelectbox {
-        background-color: white;
         border-radius: 4px;
-        border: 1px solid #ddd;
     }
     .lorem-ipsum {
         background-color: #f0f0f0;
