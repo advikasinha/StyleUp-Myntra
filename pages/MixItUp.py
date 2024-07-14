@@ -6,8 +6,55 @@ import requests
 from io import BytesIO
 from PIL import Image
 
+# Custom CSS
+st.markdown("""
+<style>
+    .main {
+        background-color: #f0f0f5;
+        padding: 2rem;
+    }
+    .stButton>button {
+        background-color: #ff3366;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        transition: all 0.3s;
+    }
+    .stButton>button:hover {
+        background-color: #e60050;
+    }
+    .stSelectbox {
+        background-color: white;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+    }
+    h1 {
+        color: #ff3366;
+        text-align: center;
+        padding-bottom: 1rem;
+    }
+    h2 {
+        color: #333;
+        padding-top: 1rem;
+    }
+    .stImage {
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .inspiration-gallery {
+        background-color: white;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # Base URL for your GitHub raw content
-BASE_URL = "https://raw.githubusercontent.com/advikasinha/StyleUp-Myntra/main/images"
+BASE_URL = "https://raw.githubusercontent.com/advikasinha/StyleUp-Myntra/main/"
+
 def get_image_list(folder):
     url = f"{BASE_URL}{folder}/"
     response = requests.get(url)
@@ -27,16 +74,16 @@ def load_image(url):
     return Image.open(BytesIO(response.content))
 
 def main():
-    st.title("Fashion Style Transfer")
+    st.title("StyleUp Fashion Design")
 
-    # Carousel for pre-generated outputs
+    # Inspiration Gallery
+    st.markdown("<div class='inspiration-gallery'>", unsafe_allow_html=True)
     st.subheader("Inspiration Gallery")
     cols = st.columns(3)
     for i, (name, url) in enumerate(list(pre_generated_outputs.items())[:9]):  # Display up to 9 images
         with cols[i % 3]:
             st.image(load_image(url), caption=name, use_column_width=True)
-
-    st.markdown("---")
+    st.markdown("</div>", unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
 
