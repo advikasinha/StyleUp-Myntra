@@ -7,22 +7,41 @@ import os
 
 def get_image_list(folder):
     image_dir = os.path.join(os.path.dirname(__file__), '..', 'images', folder)
+    st.write(f"Looking for images in: {image_dir}")
+    
+    if not os.path.exists(image_dir):
+        st.error(f"Directory not found: {image_dir}")
+        return {}
+    
     images = [f for f in os.listdir(image_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
     return {f"Image {i+1}": os.path.join(image_dir, f) for i, f in enumerate(images)}
 
-silhouettes = get_image_list("silhouettes")
-styles = get_image_list("styles")
-pre_generated_outputs = get_image_list("outputs")
-
 def main():
     st.title("StyleUp Fashion Design")
+
+    st.write("Attempting to load images...")
+
+    silhouettes = get_image_list("silhouettes")
+    styles = get_image_list("styles")
+    pre_generated_outputs = get_image_list("outputs")
+
+    st.write(f"Number of silhouettes found: {len(silhouettes)}")
+    st.write(f"Number of styles found: {len(styles)}")
+    st.write(f"Number of pre-generated outputs found: {len(pre_generated_outputs)}")
+
+    if not silhouettes or not styles or not pre_generated_outputs:
+        st.error("One or more image directories could not be found or are empty. Please check your file structure and paths.")
+        return
 
     # Inspiration Gallery
     st.subheader("Inspiration Gallery")
     cols = st.columns(3)
     for i, (name, path) in enumerate(list(pre_generated_outputs.items())[:9]):  # Display up to 9 images
         with cols[i % 3]:
-            st.image(Image.open(path), caption=name, use_column_width=True)
+            try:
+                st.image(Image.open(path), caption=name, use_column_width=True)
+            except Exception as e:
+                st.error(f"Error loading image {name}: {str(e)}")
 
     st.markdown("---")
 
@@ -30,15 +49,29 @@ def main():
 
     with col1:
         st.subheader("Select Silhouette")
-        content_file = st.selectbox("Choose a silhouette", list(silhouettes.keys()), key="silhouette")
-        st.image(Image.open(silhouettes[content_file]), caption=content_file)
+        silhouette_options = list(silhouettes.keys())
+        if silhouette_options:
+            content_file = st.selectbox("Choose a silhouette", silhouette_options, key="silhouette")
+            try:
+                st.image(Image.open(silhouettes[content_file]), caption=content_file)
+            except Exception as e:
+                st.error(f"Error loading silhouette image: {str(e)}")
+        else:
+            st.error("No silhouettes available")
 
     with col2:
         st.subheader("Select Style")
-        style_file = st.selectbox("Choose a style", list(styles.keys()), key="style")
-        st.image(Image.open(styles[style_file]), caption=style_file)
+        style_options = list(styles.keys())
+        if style_options:
+            style_file = st.selectbox("Choose a style", style_options, key="style")
+            try:
+                st.image(Image.open(styles[style_file]), caption=style_file)
+            except Exception as e:
+                st.error(f"Error loading style image: {str(e)}")
+        else:
+            st.error("No styles available")
 
-    if content_file and style_file:
+    if silhouette_options and style_options:
         if st.button("Design It!", key="design_button", help="Click to design your image"):
             with st.spinner("Designing your image..."):
                 try:
