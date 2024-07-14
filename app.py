@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.set_page_config(page_title="DesignerHub", page_icon="👚", layout="wide")
+st.set_page_config(page_title="DesignerHub", layout="wide")
 
 # Custom CSS
 st.markdown("""
@@ -74,6 +74,30 @@ st.markdown("""
         height: 5px;
         margin: 30px 0;
     }
+    .feature-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .feature-button {
+        background: linear-gradient(90deg, #F13AB1, #E72744);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        display: block;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .feature-button:hover {
+        transform: scale(1.05);
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -88,24 +112,30 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown("""
     <div class="feature-box">
+        <img src="https://source.unsplash.com/random/400x300/?fashion,design" alt="Create Your Own" class="feature-image">
         <div class="feature-title">Create Your Own</div>
         <div class="feature-description">Transform your designs with AI-powered style transfer. Unleash your creativity and bring your unique fashion ideas to life.</div>
+        <button class="feature-button">Start Creating</button>
     </div>
     """, unsafe_allow_html=True)
 
 with col2:
     st.markdown("""
     <div class="feature-box">
+        <img src="https://source.unsplash.com/random/400x300/?AI,fashion" alt="AI-aided Designing" class="feature-image">
         <div class="feature-title">AI-aided Designing</div>
         <div class="feature-description">Let DALL-E generate a unique look. Explore the possibilities of AI-generated fashion and find inspiration for your next design.</div>
+        <button class="feature-button">Generate Designs</button>
     </div>
     """, unsafe_allow_html=True)
 
 with col3:
     st.markdown("""
     <div class="feature-box">
+        <img src="https://source.unsplash.com/random/400x300/?clothing,collection" alt="Mix It Up" class="feature-image">
         <div class="feature-title">Mix It Up</div>
         <div class="feature-description">Choose from Myntra's own exquisite collection. Combine and customize pieces to create your perfect outfit.</div>
+        <button class="feature-button">Explore Collection</button>
     </div>
     """, unsafe_allow_html=True)
 
