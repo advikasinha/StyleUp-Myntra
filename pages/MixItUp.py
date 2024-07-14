@@ -184,10 +184,10 @@ def main():
                     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
                     content_img = Image.open(silhouettes[content_file])
                     style_img = Image.open(styles[style_file])
-                    content_tensor, style_tensor = utils.load_images(content_img, style_img, device)
+                    content_tensor, style_tensor = utils2.load_images(content_img, style_img, device)
                     output_c = style_transfer.run_style_transfer(content_tensor, style_tensor, num_steps=500)
                     output = style_transfer.enhance_silhouette(output_c, content_tensor)
-                    output_pil = utils.tensor_to_pil(output)
+                    output_pil = utils2.tensor_to_pil(output)
                     st.image(output_pil, caption="Your Styled Design", width=600, use_column_width=False, output_format="PNG")
                 except Exception as e:
                     st.error(f"An error occurred during the style transfer process: {str(e)}")
