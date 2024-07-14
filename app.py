@@ -75,26 +75,26 @@ def main():
     """, unsafe_allow_html=True)
 
     # # Header with Myntra logo image and StyleUp text
-    # st.markdown(
-    # """
-    # <div class="header">
-    #     <img src="Myntra-Logo.png" alt="Myntra Logo">
-    #     <div class="title">StyleUp</div>
-    # </div>
-    # """,unsafe_allow_html=True)
+    st.markdown(
+    """
+    <div class="header">
+        <img src="Myntra_Logo.png" alt="Myntra Logo">
+        <div class="title">StyleUp</div>
+    </div>
+    """,unsafe_allow_html=True)
 
     st.markdown(
     """
     <div style="display: flex; justify-content: center; margin-top: 20px;">
-        <img src="Myntra-Logo.png" alt="Myntra Logo" style="width: 100px; margin-right: 10px;">
+        <img src="Myntra_Logo.png" alt="Myntra Logo" style="width: 100px; margin-right: 10px;">
         <h1 style="font-size: 36px; font-weight: bold; color: #F13AB1;">StyleUp</h1>
     </div>
     """,
     unsafe_allow_html=True
     )
 
-    st.image("Myntra-Logo.png", caption="Myntra Logo", width=100)
-    
+    st.image("Myntra_Logo.png", caption="Myntra Logo", width=100)
+
     # Main content
     st.markdown('<div class="content">', unsafe_allow_html=True)
 
