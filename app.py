@@ -93,10 +93,15 @@ def main():
     unsafe_allow_html=True
     )
 
-    st.image("Myntra_Logo.png", caption="Myntra Logo", width=100)
+    header_col1, header_col2 = st.columns([1, 5])
+    with header_col1:
+        st.image("Myntra-Logo.png", width=100)
+
+    with header_col2:
+        st.markdown('<h1 class="title">StyleUp</h1>', unsafe_allow_html=True)
 
     # Main content
-    st.markdown('<div class="content">', unsafe_allow_html=True)
+    # st.markdown('<div class="content">', unsafe_allow_html=True)
 
     # DESIGNER HUB title
     st.markdown('<h1 class="center-title" style="font-size: 40px;">DESIGNER HUB</h1>', unsafe_allow_html=True)
