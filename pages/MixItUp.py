@@ -7,7 +7,7 @@ from io import BytesIO
 from PIL import Image
 
 # Base URL for your GitHub raw content
-BASE_URL = "https://raw.githubusercontent.com/advikasinha/StyleUp-Myntra/main/images"
+BASE_URL = "https://raw.githubusercontent.com/advikasinha/StyleUp-Myntra/main/images/"
 def get_image_list(folder):
     url = f"{BASE_URL}{folder}/"
     response = requests.get(url)
