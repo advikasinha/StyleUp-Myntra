@@ -64,10 +64,9 @@ st.markdown("""
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .carousel {
-        background-color: white;
-        padding: 1rem;
+        background-color: black;
         border-radius: 8px;
-        margin-bottom: 2rem;
+        margin-bottom:1rem;
     }
     .gallery-image {
         transition: transform 0.3s ease-in-out;
@@ -127,7 +126,7 @@ def main():
     pre_generated_outputs = get_image_list("outputs")
 
     # Carousel for pre-generated outputs
-    st.subheader("Inspiration Gallery")
+    st.markdown('<h3 style="color: #E72744; text-align: center; font-size: 2opx;">Inspiration Gallery</h3>', unsafe_allow_html=True)
     st.markdown("<div class='carousel'>", unsafe_allow_html=True)
     output_images = list(pre_generated_outputs.items())
     current_image_index = st.session_state.get('current_image_index', 0)
