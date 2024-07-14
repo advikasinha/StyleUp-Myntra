@@ -18,7 +18,7 @@ st.markdown("""
         right: 0;
         background: #29303E;
         color: #F13AB1;
-        padding: 20px 30px;
+        padding: 10px 10px;
         display: flex;
         align-items: center;
         z-index: 1000;
@@ -99,7 +99,6 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
-st.write("")
 st.write("")
 
 st.markdown("""
