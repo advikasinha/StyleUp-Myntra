@@ -102,11 +102,6 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-
-    # Create Your Own Designs section
-    st.write("")
-    st.markdown('<h3 style="color: #F13AB1; text-align: center; font-size: 28px;">Create Your Own Designs</h2>', unsafe_allow_html=True)
-
     st.write("")
 
     # File uploaders
