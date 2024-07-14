@@ -73,18 +73,16 @@ def main():
     st.markdown(
     """
     <div class="header">
-        <img src="Myntra-Logo.png" alt="Myntra Logo">
+        <img src="Myntra-Logo.png" alt="Myntra Logo" style="width: 100px; margin-right: 20px;">
         <div class="title">StyleUp</div>
     </div>
-    """,
-    unsafe_allow_html=True
-    )
+    """,unsafe_allow_html=True)
 
     # Main content
     st.markdown('<div class="content">', unsafe_allow_html=True)
 
     # DESIGNER HUB title
-    st.markdown('<h1 class="center-title">DESIGNER HUB</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="center-title" style="font-size: 40px;">DESIGNER HUB</h1>', unsafe_allow_html=True)
 
     # Color strip
     st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
@@ -98,17 +96,17 @@ def main():
 
     # Create Your Own Designs section
     st.write("")
-    st.markdown('<h1 style="color: #F13AB1;">Create Your Own Designs</h1>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: #F13AB1; text-align: center; font-size: 28px;">Create Your Own Designs</h2>', unsafe_allow_html=True)
 
     # File uploaders
     col1, col2 = st.columns(2)
     with col1:
-        content_file = st.file_uploader("Choose a content image", type=["png", "jpg", "jpeg"])
+        content_file = st.file_uploader('<p style="color: #F05524; font-style: italic;">Upload your Silhouette</p>', type=["png", "jpg", "jpeg"])
     with col2:
-        style_file = st.file_uploader("Choose a style image", type=["png", "jpg", "jpeg"])
+        style_file = st.file_uploader('<p style="color: #F05524; font-style: italic;">Upload your Style</p>', type=["png", "jpg", "jpeg"])
 
     if content_file and style_file:
-        if st.button("Design It!"):
+        if st.button("Design It!", key="design_button", help="Click to design your image"):
             with st.spinner("Designing your image..."):
                 try:
                     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
