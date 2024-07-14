@@ -32,7 +32,7 @@ def main():
     .header .title {
         font-size: 36px;
         font-weight: bold;
-        color: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E);
+        color: #F13AB1;
     }
     .content {
         margin-top: 120px; /* Adjust margin to ensure content is below fixed header */
@@ -46,7 +46,7 @@ def main():
         color: #29303E;
     }
     .lorem-ipsum {
-        background-color: #DCDCDC;
+        background-color: #f0f0f0;
         padding: 20px;
         margin: 20px 0;
         color: #29303E;
