@@ -125,24 +125,14 @@ import torch
 from PIL import Image
 import style_transfer
 import utils
-import os
-import base64
 
 st.set_page_config(page_title="DesignerHub", layout="wide")
 
-def get_base64_of_bin_file(bin_file):
-    with open(bin_file, 'rb') as f:
-        data = f.read()
-    return base64.b64encode(data).decode()
 
 def main():
     # Get the base64 string of the logo
     logo_path = "Myntra-Logo.png"
-    if os.path.exists(logo_path):
-        logo_base64 = get_base64_of_bin_file(logo_path)
-    else:
-        st.error("Logo file not found. Please make sure 'myntra_logo.png' is in the same directory as this script.")
-        return
+    st.image(logo_path, width=100)
 
     # Custom CSS
     st.markdown("""
@@ -162,6 +152,14 @@ def main():
         align-items: center;
         z-index: 1000;
     }
+    .header img {
+        width: 100px;
+        margin-right: 20px;
+    }
+    .header .title {
+        font-size: 36px;
+        font-weight: bold;
+    }
     .logo-image {
         height: 30px;
         margin-right: 10px;
@@ -170,6 +168,7 @@ def main():
         font-size: 24px;
         color: #FD913C;
         font-weight: bold;
+        margin-left: 20px;
     }
     .content {
         margin-top: 60px;
@@ -199,16 +198,24 @@ def main():
     .stButton>button:hover {
         background-color: #E72744;
     }
+    .color-strip {
+        height: 5px;
+        background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E);
+        margin-bottom: 20px;
+    }
     </style>
     """, unsafe_allow_html=True)
 
     # Header with Myntra logo image and StyleUp text
-    st.markdown(f"""
+    st.markdown(
+    """
     <div class="header">
-        <img src="data:image/png;base64,{logo_base64}" class="logo-image">
-        <span class="app-name">StyleUp</span>
+        <img src="Myntra-Logo.png" alt="Myntra Logo">
+        <div class="title">StyleUp</div>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True
+        )
 
     # Main content
     st.markdown('<div class="content">', unsafe_allow_html=True)
