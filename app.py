@@ -107,7 +107,7 @@ def main():
         st.markdown('<span class="upload-label">Upload your Silhouette</span>', unsafe_allow_html=True)
         content_file = st.file_uploader('', type=["png", "jpg", "jpeg"])  # Empty string for label
     with col2:
-        st.markdown('<p style="color: #F05524; font-style: italic;">Upload your Style</p>', unsafe_allow_html=True)
+        st.markdown('<span class="upload-label">Upload your Style</p>', unsafe_allow_html=True)
         style_file = st.file_uploader('', type=["png", "jpg", "jpeg"])
 
     if content_file and style_file:
