@@ -48,7 +48,6 @@ def main():
         background-color: #f9f9f9;
         padding: 20px;
         margin: 20px 0;
-        border-radius: 5px;
         color: #29303E;
     }
     .stButton>button {
@@ -99,8 +98,7 @@ def main():
 
     # Create Your Own Designs section
     st.write("")
-    st.write("")
-    st.header("Create Your Own Designs")
+    st.markdown('<h1 style="color: #F13AB1;">Create Your Own Designs</h1>', unsafe_allow_html=True)
 
     # File uploaders
     col1, col2 = st.columns(2)
