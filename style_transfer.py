@@ -132,3 +132,35 @@ def run_style_transfer(content_img, style_img, num_steps=500,
 
     input_img.data.clamp_(0, 1)
     return input_img
+
+def enhance_silhouette(styled_image, content_image, edge_strength=1.5, blend_strength=0.7):
+    device = styled_image.device  # Get the device of the input tensor
+
+    # Convert content image to grayscale for edge detection
+    content_gray = transforms.Grayscale()(content_image).squeeze()
+
+    # Detect edges using Sobel filters
+    sobel_x = torch.tensor([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]], dtype=torch.float32).unsqueeze(0).unsqueeze(0).to(device)
+    sobel_y = torch.tensor([[-1, -2, -1], [0, 0, 0], [1, 2, 1]], dtype=torch.float32).unsqueeze(0).unsqueeze(0).to(device)
+
+    edges_x = torch.nn.functional.conv2d(content_gray.unsqueeze(0).unsqueeze(0), sobel_x, padding=1)
+    edges_y = torch.nn.functional.conv2d(content_gray.unsqueeze(0).unsqueeze(0), sobel_y, padding=1)
+    edges = torch.sqrt(edges_x**2 + edges_y**2).squeeze()
+
+    # Normalize edge strengths
+    edges = (edges - edges.min()) / (edges.max() - edges.min())
+
+    # Create a soft mask from the edges
+    mask = torch.sigmoid(10 * (edges - 0.5))  # Adjust the threshold and steepness as needed
+    mask = mask.unsqueeze(0).repeat(3, 1, 1)
+
+    # Soften the mask
+    mask = transforms.GaussianBlur(3)(mask)
+
+    # Blend the styled image with edge-enhanced original content
+    enhanced = styled_image * (1 - mask * edge_strength) + content_image * mask * blend_strength
+
+    # Final blend to preserve more of the styled image
+    final = styled_image * (1 - blend_strength) + enhanced * blend_strength
+
+    return torch.clamp(final, 0, 1)

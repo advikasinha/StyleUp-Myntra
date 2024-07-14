@@ -79,7 +79,8 @@ def main():
             with st.spinner("Generating styled image..."):
                 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
                 content_img, style_img = utils.load_images(content_file, style_file, device)
-                output = style_transfer.run_style_transfer(content_img, style_img, num_steps=500)
+                output_c = style_transfer.run_style_transfer(content_img, style_img, num_steps=500)
+                output= style_transfer.enhance_silhouette(output_c, content_img)
                 output_pil = utils.tensor_to_pil(output)
                 st.image(output_pil, caption="Styled Image", use_column_width=True)
             progress_bar.progress(100)
