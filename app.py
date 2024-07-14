@@ -78,7 +78,7 @@ def main():
     st.markdown(
     """
     <div class="header">
-        <img src="Myntra-Logo.png" alt="Myntra Logo" style="width: 100px; margin-right: 20px;">
+        <img src="Myntra-Logo.png" alt="Myntra Logo">
         <div class="title">StyleUp</div>
     </div>
     """,unsafe_allow_html=True)
