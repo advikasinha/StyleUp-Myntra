@@ -91,7 +91,10 @@ def main():
     </div>
     """,
     unsafe_allow_html=True
-)
+    )
+
+    st.image("Myntra-Logo.png", caption="Myntra Logo", width=100)
+    
     # Main content
     st.markdown('<div class="content">', unsafe_allow_html=True)
 
