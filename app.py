@@ -137,9 +137,11 @@ st.markdown('<div class="myntra-gradient"></div>', unsafe_allow_html=True)
 st.markdown("""
     <div class="lorem-ipsum">
         <p style="font-size: 16px; line-height: 1.6; color: #333;">Welcome to <strong>Designer Hub</strong>, your ultimate playground on Myntra! Designed for both budding designers and fashion enthusiasts, this platform eliminates the need for traditional mockups.</p>
-        <p style="font-size: 16px; line-height: 1.6; color: #333;"><strong><em>Explore our innovative fashion design tools and features:</em></strong> 
+        <p style="font-size: 16px; line-height: 1.6; color: #333;"><strong><em>Explore our innovative fashion design tools and features and:</em></strong></p>
+        <p style="text-align: center; font-size: 24px; line-height: 1.6; background: linear-gradient(90deg, #F13AB1, #E72744, #FD913C, #F05524, #29303E); -webkit-background-clip: text; color: transparent;"><strong>LET'S STYLE UP!</strong></p>
     </div>
     """, unsafe_allow_html=True)
+
 
 col1, col2, col3 = st.columns(3)
 

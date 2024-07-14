@@ -113,7 +113,7 @@ def main():
     <div class="lorem-ipsum">
         <p style="font-size: 16px; line-height: 1.6; color: #333;">Welcome to <strong>Designer Hub</strong>, your ultimate playground on Myntra! Designed for both budding designers and fashion enthusiasts, this platform eliminates the need for traditional mockups.</p>
         <p style="font-size: 16px; line-height: 1.6; color: #333;"><strong><em>Mix It Up</em></strong> allows you to browse through Myntra's exquisite collection to craft your perfect outfit. Here's how it works:</p>
-        <p style="font-size: 16px; line-height: 1.6; color: #29303E;"><strong>Inspiration Gallery</strong>: Start by browsing our pre-generated designs in the Inspiration Gallery. Let these unique creations spark your imagination and guide your style choices.</p>
+        <p style="font-size: 16px; line-height: 1.6; color: #29303E;"><strong>Inspiration Gallery</strong>: Start by browsing our pre-generated designs in the Inspiration Gallery.</p>
         <p style="font-size: 16px; line-height: 1.6; color: #29303E;"><strong>Choose Your Canvas</strong>: Select a silhouette that speaks to you. This will be the foundation of your custom design.</p>        
         <p style="font-size: 16px; line-height: 1.6; color: #29303E;"><strong>Add Your Flair</strong>: Pick a style that catches your eye. This will infuse your chosen silhouette with color, pattern, and personality.</p>
         <p style="font-size: 16px; line-height: 1.6; color: #29303E;"><strong>Design It!</strong>: With just a click, watch as AI technology blends your chosen silhouette and style into a one-of-a-kind fashion piece.</p>       
@@ -164,7 +164,7 @@ def main():
 
     with col2:
         st.markdown('<span class="upload-label">Select Style</span>', unsafe_allow_html=True)
-        style_options = list(styles.keys())
+        style_options = sorted(list(styles.keys())) 
         if style_options:
             style_file = st.selectbox("Choose a style", style_options, key="style")
             try:
