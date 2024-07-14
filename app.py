@@ -146,7 +146,7 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown("""
     <div class="feature-box">
-        <img src="https://images.unsplash.com/photo-1578353022439-8cbcd4439e6a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Create Your Own" class="feature-image">
+        <img src="https://images.unsplash.com/photo-1557777586-f6682739fcf3?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Create Your Own" class="feature-image">
         <div class="feature-title">Create Your Own</div>
         <div class="feature-description">Transform your designs with AI-powered style transfer. Unleash your creativity and bring your unique fashion ideas to life.</div>
         <button class="feature-button">Start Creating</button>
@@ -156,7 +156,7 @@ with col1:
 with col2:
     st.markdown("""
     <div class="feature-box">
-        <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c" alt="AI-aided Designing" class="feature-image">
+        <img src="https://plus.unsplash.com/premium_photo-1681457330049-dcdb2ac363fe?q=80&w=1957&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="AI-aided Designing" class="feature-image">
         <div class="feature-title">AI-aided Designing</div>
         <div class="feature-description">Let DALL-E generate a unique look. Explore the possibilities of AI-generated fashion and find inspiration for your next design.</div>
         <button class="feature-button">Generate Designs</button>
@@ -166,7 +166,7 @@ with col2:
 with col3:
     st.markdown("""
     <div class="feature-box">
-        <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5" alt="Mix It Up" class="feature-image">
+        <img src="https://images.unsplash.com/photo-1702661159134-2e8d4dcf0231?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmlicmFudCUyMGNsb3RoZXN8ZW58MHx8MHx8fDA%3D" alt="Mix It Up" class="feature-image">
         <div class="feature-title">Mix It Up</div>
         <div class="feature-description">Choose from Myntra's own exquisite collection. Combine and customize pieces to create your perfect outfit.</div>
         <button class="feature-button">Explore Collection</button>
