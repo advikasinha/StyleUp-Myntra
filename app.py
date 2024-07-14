@@ -78,29 +78,29 @@ def main():
 </style>
     """, unsafe_allow_html=True)
 
-    # # Header with Myntra logo image and StyleUp text
-    st.markdown(
-    """
-    <div class="header">
-        <img src="Myntra_Logo.png" alt="Myntra Logo">
-        <div class="title">StyleUp</div>
-    </div>
-    """,unsafe_allow_html=True)
+    # # # Header with Myntra logo image and StyleUp text
+    # st.markdown(
+    # """
+    # <div class="header">
+    #     <img src="Myntra_Logo.png" alt="Myntra Logo">
+    #     <div class="title">StyleUp</div>
+    # </div>
+    # """,unsafe_allow_html=True)
 
-    st.markdown(
-    """
-    <div style="display: flex; justify-content: center; margin-top: 20px;">
-        <img src="Myntra_Logo.png" alt="Myntra Logo" style="width: 100px; margin-right: 10px;">
-        <h1 style="font-size: 36px; font-weight: bold; color: #F13AB1;">StyleUp</h1>
-    </div>
-    """,
-    unsafe_allow_html=True
-    )
+    # st.markdown(
+    # """
+    # <div style="display: flex; justify-content: center; margin-top: 20px;">
+    #     <img src="Myntra_Logo.png" alt="Myntra Logo" style="width: 100px; margin-right: 10px;">
+    #     <h1 style="font-size: 36px; font-weight: bold; color: #F13AB1;">StyleUp</h1>
+    # </div>
+    # """,
+    # unsafe_allow_html=True
+    # )
 
-    st.image("Myntra_Logo.png", caption="Myntra Logo", width=100)
+    # st.image("Myntra_Logo.png", caption="Myntra Logo", width=100)
 
-    # Main content
-    st.markdown('<div class="content">', unsafe_allow_html=True)
+    # # Main content
+    # st.markdown('<div class="content">', unsafe_allow_html=True)
 
     # DESIGNER HUB title
     st.markdown('<h1 class="center-title" style="font-size: 40px;">DESIGNER HUB</h1>', unsafe_allow_html=True)
@@ -137,16 +137,16 @@ def main():
 
     if content_file and style_file:
         if st.button("Design It!", key="design_button", help="Click to design your image", 
-             style='background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E); \
-                    color: white; \
-                    font-weight: bold; \
-                    border: none; \
-                    border-radius: 25px; \
-                    padding: 16px 32px; \
-                    margin: 0 auto; \
-                    display: block; \
-                    font-size: 18px; \
-                    cursor: pointer;'):
+             format_func=lambda _: '<style> .stButton button { \
+                background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E); \
+                color: white; \
+                font-weight: bold; \
+                border: none; \
+                border-radius: 25px; \
+                padding: 16px 32px; \
+                font-size: 18px; \
+                cursor: pointer; \
+             } </style>'):
             with st.spinner("Designing your image..."):
                 try:
                     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
