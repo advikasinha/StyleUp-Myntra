@@ -95,8 +95,8 @@ def main():
     st.markdown("""
     <div class="lorem-ipsum">
         <p style="font-size: 16px; line-height: 1.6; color: #333;">Welcome to <strong>Designer Hub</strong>, your ultimate playground on Myntra! Designed for both budding designers and fashion enthusiasts, this platform eliminates the need for traditional mockups.</p>
-        <p style="font-size: 16px; line-height: 1.6; color: #333;">**Create Your Own Design** empowers you to unleash your creativity effortlessly. Simply upload your unique silhouette and pair it with a light-colored style photo to see your vision come to life in vibrant detail!</p>
-        <p style="font-size: 16px; line-height: 1.6; color: #333;">Join us on Designer Hub and transform your fashion aspirations into stunning reality. Dive in and let your imagination run wild!</p>
+        <p style="font-size: 16px; line-height: 1.6; color: #333;"><strong><em>Create Your Own Design</em></strong> empowers you to unleash your creativity effortlessly. Simply upload your unique silhouette and pair it with a light-colored style photo to watch your ideas come to life in vibrant, personalized fashion statements!</p>
+        <p style="font-size: 16px; line-height: 1.6; color: #29303E; text-align: center;">;">Dive in and let your imagination run wild!</p>
     </div>
     """, unsafe_allow_html=True)
 
