@@ -1,3 +1,11 @@
+import streamlit as st
+import torch
+from PIL import Image
+import style_transfer
+import utils
+
+st.set_page_config(page_title="DesignerHub", layout="wide")
+
 def main():
     # Custom CSS with all Myntra logo colors
     st.markdown("""
