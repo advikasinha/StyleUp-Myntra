@@ -23,11 +23,13 @@ def main():
     padding: 20px 40px; /* Increase padding for better visibility */
     display: flex;
     align-items: center;
+    justify-content: space-between; /* Align items and space them evenly */
     z-index: 1000;
 }
 
 .header img {
     width: 80px; /* Adjust width for the logo */
+    height: auto; /* Maintain aspect ratio */
     margin-right: 20px;
 }
 
@@ -35,7 +37,9 @@ def main():
     font-size: 24px; /* Adjust font size for the title */
     font-weight: bold;
     color: #F13AB1;
+    margin-right: 20px; /* Add some space between logo and title */
 }
+
 
 .content {
     margin-top: 40px;
