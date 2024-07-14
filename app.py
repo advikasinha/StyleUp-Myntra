@@ -20,14 +20,14 @@ def main():
     right: 0;
     background: #29303E;
     color: #F13AB1;
-    padding: 30px 40px; /* Adjust padding as needed */
+    padding: 20px 30px; /* Adjust padding as needed */
     display: flex;
     align-items: center;
     z-index: 1000;
 }
 
 .header .title {
-    font-size: 36px; /* Adjust font size */
+    font-size: 18; /* Adjust font size */
     font-weight: bold;
     color: #F13AB1;
     margin-right: auto; /* Align title to the left */
