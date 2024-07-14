@@ -19,7 +19,7 @@ def main():
         left: 0;
         right: 0;
         background: #29303E;
-        color: white;
+        color: #F13AB1;
         padding: 10px 16px;
         display: flex;
         align-items: center;
@@ -49,6 +49,7 @@ def main():
         padding: 20px;
         margin: 20px 0;
         border-radius: 5px;
+        color: #29303E;
     }
     .stButton>button {
         background-color: #F13AB1;
