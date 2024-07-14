@@ -139,7 +139,7 @@ def main():
             current_image_index = (current_image_index - 1) % len(output_images)
     with col2:
         name, path = output_images[current_image_index]
-        st.image(Image.open(path), caption=name, use_column_width=True, output_format="PNG")
+        st.image(Image.open(path), caption=name, width=400, output_format="PNG")
     with col3:
         if st.button("Next"):
             current_image_index = (current_image_index + 1) % len(output_images)
@@ -153,27 +153,15 @@ def main():
     with col1:
         st.markdown('<span class="upload-label">Select Silhouette</span>', unsafe_allow_html=True)
         silhouette_options = list(silhouettes.keys())
-        if silhouette_options:
-            content_file = st.selectbox("Choose a silhouette", silhouette_options, key="silhouette")
-            try:
-                st.image(Image.open(silhouettes[content_file]), caption=content_file, use_column_width=True, output_format="PNG")
-            except Exception as e:
-                st.error(f"Error loading silhouette image: {str(e)}")
-        else:
-            st.error("No silhouettes available")
-
+        content_file = st.selectbox("Choose a silhouette", silhouette_options, key="silhouette")
+        st.image(Image.open(silhouettes[content_file]), caption=content_file, width=400, output_format="PNG")
+            
     with col2:
         st.markdown('<span class="upload-label">Select Style</span>', unsafe_allow_html=True)
         style_options = sorted(list(styles.keys())) 
-        if style_options:
-            style_file = st.selectbox("Choose a style", style_options, key="style")
-            try:
-                st.image(Image.open(styles[style_file]), caption=style_file, use_column_width=True, output_format="PNG")
-            except Exception as e:
-                st.error(f"Error loading style image: {str(e)}")
-        else:
-            st.error("No styles available")
-
+        style_file = st.selectbox("Choose a style", style_options, key="style")
+        st.image(Image.open(styles[style_file]), caption=style_file, width=400, output_format="PNG")
+        
     if silhouette_options and style_options:
         if st.button("Design It!", key="design_button", help="Click to design your image"):
             with st.spinner("Designing your image..."):
