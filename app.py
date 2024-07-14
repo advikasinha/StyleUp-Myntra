@@ -12,7 +12,7 @@ with col1:
     st.subheader("Style Transfer")
     st.write("Transform your designs with AI-powered style transfer.")
     if st.button("Try Style Transfer"):
-        st.switch_page("pages/CreateYourOwn/_app")
+        st.switch_page("pages/CreateYourOwn")
 
 with col2:
     st.subheader("Feature 2")
