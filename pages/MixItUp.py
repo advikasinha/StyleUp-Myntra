@@ -24,6 +24,13 @@ st.markdown("""
     z-index: 1000;
 }
 
+            .center-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0;
+    color: #29303E;
+}
 .header .title {
     font-size: 18; /* Adjust font size */
     font-weight: bold;
