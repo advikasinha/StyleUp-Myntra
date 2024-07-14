@@ -101,7 +101,7 @@ def main():
     # File uploaders
     col1, col2 = st.columns(2)
     with col1:
-        content_file = st.file_uploader('Upload your Silhouette', type=["png", "jpg", "jpeg"], help='<p style="color: #F05524; font-style: italic;">Upload your Silhouette</p>')
+        content_file = st.file_uploader('Upload your Silhouette', type=["png", "jpg", "jpeg"], help='<span style="color: black;">Upload your Silhouette</p>')
     with col2:
         style_file = st.file_uploader('Upload your Style', type=["png", "jpg", "jpeg"], help='<p style="color: #F05524; font-style: italic;">Upload your Style</p>')
 
