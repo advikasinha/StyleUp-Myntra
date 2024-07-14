@@ -169,21 +169,29 @@ def main():
         st.markdown('<span class="upload-label">Select Silhouette</span>', unsafe_allow_html=True)
         silhouette_options = list(silhouettes.keys())
         content_file = st.selectbox("Choose a silhouette", silhouette_options, key="silhouette")
-        st.image(Image.open(silhouettes[content_file]), caption=content_file, width=400, output_format="JPG")
-            
+        try:
+            content_img = Image.open(silhouettes[content_file])
+            st.image(content_img, caption=content_file, width=400, output_format="JPEG")
+        except Exception as e:
+            st.error(f"Error loading silhouette image: {str(e)}")
+
+    # Column 2: Select Style
     with col2:
         st.markdown('<span class="upload-label">Select Style</span>', unsafe_allow_html=True)
         style_options = sorted(list(styles.keys())) 
         style_file = st.selectbox("Choose a style", style_options, key="style")
-        st.image(Image.open(styles[style_file]), caption=style_file, width=400, output_format="JPG")
-        
+        try:
+            style_img = Image.open(styles[style_file])
+            st.image(style_img, caption=style_file, width=400, output_format="JPEG")
+        except Exception as e:
+            st.error(f"Error loading style image: {str(e)}")
+
+    # Style Transfer Button
     if silhouette_options and style_options:
         if st.button("Design It!", key="design_button", help="Click to design your image"):
             with st.spinner("Designing your image..."):
                 try:
                     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-                    content_img = Image.open(silhouettes[content_file])
-                    style_img = Image.open(styles[style_file])
                     content_tensor, style_tensor = utils2.load_images(content_img, style_img, device)
                     output_c = style_transfer.run_style_transfer(content_tensor, style_tensor, num_steps=500)
                     output = style_transfer.enhance_silhouette(output_c, content_tensor)
