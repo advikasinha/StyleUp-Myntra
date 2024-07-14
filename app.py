@@ -17,25 +17,26 @@ def main():
         padding: 10px 16px;
         background: #29303E;
         color: white;
-        position: fixed;
         top: 0;
         width: 100%;
         z-index: 1000;
-        display: flex;
-        align-items: center;
     }
-    .logo {
-        height: 40px;
-        margin-right: 20px;
+    .logo-text {
+        font-size: 36px;
+        font-weight: bold;
+        background: linear-gradient(45deg, #F13AB1, #E72744, #FD913C, #F05524);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
     }
     .app-name {
         font-size: 24px;
         color: #FD913C;
-        font-weight: bold;
+        margin-left: 20px;
     }
     .content {
         padding: 16px;
-        margin-top: 70px;
+        margin-top: 10px;
     }
     .sidebar {
         background-color: #f9f9f9;
@@ -74,10 +75,10 @@ def main():
     </style>
     """, unsafe_allow_html=True)
 
-    # Header with Myntra logo and DesignerHub text
+    # Header with text-based Myntra logo and DesignerHub text
     st.markdown("""
     <div class="header">
-        <img src="https://raw.githubusercontent.com/advikasinha/StyleUp-Myntra/main/Myntra-Logo.png" class="logo" alt="Myntra Logo">
+        <span class="logo-text">myntra</span>
         <span class="app-name">DesignerHub</span>
     </div>
     <div class="color-strip"></div>
