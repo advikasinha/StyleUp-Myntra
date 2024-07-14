@@ -35,7 +35,7 @@ def main():
         color: #F13AB1;
     }
     .content {
-        margin-top: 120px; /* Adjust margin to ensure content is below fixed header */
+        margin-top: 40px;
         padding: 0 16px;
     }
     .center-title {
