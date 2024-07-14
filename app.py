@@ -88,7 +88,7 @@ def main():
     st.image("Myntra_Logo.png", caption="Myntra Logo", width=100)
 
     # Main content
-    # st.markdown('<div class="content">', unsafe_allow_html=True)
+    st.markdown('<div class="content">', unsafe_allow_html=True)
 
     # DESIGNER HUB title
     st.markdown('<h1 class="center-title" style="font-size: 40px;">DESIGNER HUB</h1>', unsafe_allow_html=True)
