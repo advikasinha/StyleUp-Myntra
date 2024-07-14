@@ -13,36 +13,29 @@ def main():
 .stApp {
     background-color: #FFFFFF;
 }
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: #29303E;
-    color: #F13AB1;
-    padding: 20px 40px; /* Increase padding for better visibility */
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Align items and space them evenly */
-    z-index: 1000;
-}
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #29303E;
+        color: #F13AB1;
+        padding: 20px 40px; /* Increase padding for better visibility */
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* Align items and space them evenly */
+        z-index: 1000;
+    }
 
-.header img {
-    width: 80px; /* Adjust width for the logo */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 20px;
-}
-
-.header .title {
-    font-size: 24px; /* Adjust font size for the title */
-    font-weight: bold;
-    color: #F13AB1;
-    margin-right: 20px; /* Add some space between logo and title */
-}
-
+    .header .title {
+        font-size: 24px; /* Adjust font size for the title */
+        font-weight: bold;
+        color: #F13AB1;
+        margin-right: 20px; /* Add some space between logo and title */
+    }
 
 .content {
-    margin-top: 40px;
+    margin-top: 10px;
     padding: 0 16px;
 }
 .center-title {
@@ -88,12 +81,14 @@ def main():
 
     # # # Header with Myntra logo image and StyleUp text
     st.markdown(
-    """
-    <div class="header">
-        <img src="Myntra_Logo.png" alt="Myntra Logo">
-        <div class="title">StyleUp</div>
+"""
+<div class="header">
+    <div style="width: 80px;">
+        <img src="Myntra_Logo.png" alt="Myntra Logo" style="width: 100%; height: auto;">
     </div>
-    """,unsafe_allow_html=True)
+    <div class="title">StyleUp</div>
+</div>
+""", unsafe_allow_html=True)
 
     # st.markdown(
     # """
