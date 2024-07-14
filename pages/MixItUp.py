@@ -8,22 +8,44 @@ import os
 # Custom CSS
 st.markdown("""
 <style>
-    .main {
-        background-color: #f0f0f5;
-        padding: 2rem;
+.stApp {
+    background-color: #FFFFFF;
     }
+            .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #29303E;
+    color: #F13AB1;
+    padding: 20px 30px; /* Adjust padding as needed */
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+.header .title {
+    font-size: 18; /* Adjust font size */
+    font-weight: bold;
+    color: #F13AB1;
+    margin-right: auto; /* Align title to the left */
+}
+
     .stButton>button {
-        background-color: #F13AB1;
-        color: white;
-        font-weight: bold;
-        border: none;
-        border-radius: 4px;
-        padding: 0.5rem 1rem;
-        transition: all 0.3s;
-    }
-    .stButton>button:hover {
-        background-color: #E72744;
-    }
+    background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px; /* Adjust border radius for a rounded button */
+    padding: 16px 32px; /* Adjust padding for button size */
+    margin: 0 auto; /* Center the button */
+    display: block; /* Ensure it's a block element for margin auto to work */
+    font-size: 18px; /* Adjust font size */
+    cursor: pointer;
+                
+}
+.stButton>button:hover {
+    background-color: #FD913C;
     .stSelectbox {
         background-color: white;
         border-radius: 4px;
@@ -54,38 +76,59 @@ st.markdown("""
     .gallery-image:hover {
         transform: scale(1.05);
     }
+            .color-strip {
+    height: 5px;
+    background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E);
+    margin: 20px 0; /* Adjust margin to add spacing around the color strip */
+}
+        .footer {
+        text-align: center;
+        padding: 20px;
+        color: #29303E;
+        font-weight: 300;
+    }
 </style>
 """, unsafe_allow_html=True)
 
+st.markdown(
+"""
+<div class="header">
+    <div class="title">StyleUp</div>
+</div>
+""", unsafe_allow_html=True)
+
 def get_image_list(folder):
-    image_dir = os.path.join(os.path.dirname(__file__), '..', 'images', folder)
-    st.write(f"Looking for images in: {image_dir}")
-    
-    if not os.path.exists(image_dir):
-        st.error(f"Directory not found: {image_dir}")
-        return {}
-    
+    image_dir = os.path.join(os.path.dirname(__file__), '..', 'images', folder)    
     images = [f for f in os.listdir(image_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
     return {os.path.splitext(f)[0]: os.path.join(image_dir, f) for f in images}
 
 def main():
-    st.title("StyleUp Fashion Design")
 
-    st.write("Attempting to load images...")
+    st.markdown('<h1 class="center-title" style="font-size: 40px;">DESIGNER HUB</h1>', unsafe_allow_html=True)
+
+    st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
+
+    st.markdown('<h3 style="color: #F13AB1; text-align: center; font-size: 28px;">Mix It Up</h3>', unsafe_allow_html=True)
+
+    st.markdown("""
+    <div class="lorem-ipsum">
+        <p style="font-size: 16px; line-height: 1.6; color: #333;">Welcome to <strong>Designer Hub</strong>, your ultimate playground on Myntra! Designed for both budding designers and fashion enthusiasts, this platform eliminates the need for traditional mockups.</p>
+        <p style="font-size: 16px; line-height: 1.6; color: #333;"><strong><em>Mix It Up</em></strong> allows you to browse through Myntra's exquisite collection to craft your perfect outfit. Here's how it works:</p>
+        <p style="font-size: 16px; line-height: 1.6; color: #29303E;"><strong>Inspiration Gallery<strong>: Start by browsing our pre-generated designs in the Inspiration Gallery. Let these unique creations spark your imagination and guide your style choices.</p>
+        <p style="font-size: 16px; line-height: 1.6; color: #29303E;"><strong>Choose Your Canvas<strong>:Select a silhouette that speaks to you. This will be the foundation of your custom design.</p>        
+        <p style="font-size: 16px; line-height: 1.6; color: #29303E;"><strong>Add Your Flair<strong>:Pick a style that catches your eye. This will infuse your chosen silhouette with color, pattern, and personality.</p>
+        <p style="font-size: 16px; line-height: 1.6; color: #29303E;"><strong>Design It!<strong>:With just a click, watch as AI technology blends your chosen silhouette and style into a one-of-a-kind fashion piece.</p>       
+        <p style="font-size: 16px; line-height: 1.6; color: #29303E; text-align: center;">Ready to create? Let's Mix It Up!</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.write("")
 
     silhouettes = get_image_list("silhouettes")
     styles = get_image_list("styles")
     pre_generated_outputs = get_image_list("outputs")
 
-    st.write(f"Number of silhouettes found: {len(silhouettes)}")
-    st.write(f"Number of styles found: {len(styles)}")
-    st.write(f"Number of pre-generated outputs found: {len(pre_generated_outputs)}")
-
-    if not silhouettes or not styles or not pre_generated_outputs:
-        st.error("One or more image directories could not be found or are empty. Please check your file structure and paths.")
-        return
-
-    # Carousel for pre-generated outputs
+        # Carousel for pre-generated outputs
     st.subheader("Inspiration Gallery")
     st.markdown("<div class='carousel'>", unsafe_allow_html=True)
     output_images = list(pre_generated_outputs.items())
@@ -103,9 +146,9 @@ def main():
             current_image_index = (current_image_index + 1) % len(output_images)
     
     st.session_state['current_image_index'] = current_image_index
-    st.markdown("</div>", unsafe_allow_html=True)
 
-    st.markdown("---")
+
+    st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
 
@@ -148,5 +191,11 @@ def main():
                 except Exception as e:
                     st.error(f"An error occurred during the style transfer process: {str(e)}")
 
+    st.markdown("""
+<div class="footer">
+    DesignerHub: Empowering fashion designers with cutting-edge AI tools.
+</div>
+""", unsafe_allow_html=True)
+    
 if __name__ == "__main__":
     main()
