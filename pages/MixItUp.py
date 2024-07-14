@@ -1,6 +1,6 @@
 import streamlit as st
 import torch
-import utils
+import utils2
 import style_transfer
 from PIL import Image
 import os
