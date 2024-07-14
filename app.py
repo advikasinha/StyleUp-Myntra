@@ -13,25 +13,26 @@ def main():
 .stApp {
     background-color: #FFFFFF;
 }
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        background: #29303E;
-        color: #F13AB1;
-        padding: 20px 40px; /* Adjust padding as needed */
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        z-index: 1000;
-    }
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #29303E;
+    color: #F13AB1;
+    padding: 30px 40px; /* Adjust padding as needed */
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
 
-    .header .title {
-        font-size: 24px; /* Adjust font size */
-        font-weight: bold;
-        color: #F13AB1;
-    }
+.header .title {
+    font-size: 36px; /* Adjust font size */
+    font-weight: bold;
+    color: #F13AB1;
+    margin-right: auto; /* Align title to the left */
+}
+
 
 .content {
     margin-top: 10px;
