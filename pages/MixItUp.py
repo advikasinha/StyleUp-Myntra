@@ -130,7 +130,7 @@ def main():
     # Carousel for pre-generated outputs
     st.markdown('<h3 style="color: #F05524; text-align: center; font-size: 2opx;">Inspiration Gallery</h3>', unsafe_allow_html=True)
     st.markdown("<div class='carousel'>", unsafe_allow_html=True)
-    output_images = list(pre_generated_outputs.items())
+    output_images = sorted(list(pre_generated_outputs.items()))
     current_image_index = st.session_state.get('current_image_index', 0)
     
     col1, col2, col3 = st.columns([1, 3, 1])
