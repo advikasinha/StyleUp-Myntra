@@ -3,6 +3,7 @@ import torch
 from PIL import Image
 import style_transfer
 import utils
+import os
 
 st.set_page_config(page_title="DesignerHub", layout="wide")
 
@@ -23,13 +24,10 @@ def main():
         display: flex;
         align-items: center;
     }
-    .logo-image {
-        height: 40px;
-        margin-right: 20px;
-    }
     .app-name {
         font-size: 24px;
         color: #FD913C;
+        margin-left: 20px;
     }
     .content {
         padding: 16px;
@@ -73,15 +71,17 @@ def main():
     """, unsafe_allow_html=True)
 
     # Header with Myntra logo image and DesignerHub text
-    st.markdown("""
-    <div class="header">
-        <img src="Myntra-Logo.png" class="logo-image" alt="Myntra Logo">
-        <span class="app-name">DesignerHub</span>
-    </div>
-    <div class="color-strip"></div>
-    """, unsafe_allow_html=True)
+    col1, col2 = st.columns([1, 5])
+    with col1:
+        logo_path = "Myntra-Logo.png"
+        if os.path.exists(logo_path):
+            st.image(logo_path, width=100)
+        else:
+            st.write("Logo not found")
+    with col2:
+        st.markdown('<span class="app-name">DesignerHub</span>', unsafe_allow_html=True)
 
-    st.markdown('<div class="content">', unsafe_allow_html=True)
+    st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
 
     col1, col2 = st.columns([1, 2])
 
