@@ -51,6 +51,12 @@ st.markdown("""
     .stSelectbox {
         border-radius: 4px;
     }
+            .carousel-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
     .lorem-ipsum {
         background-color: #f0f0f0;
         padding: 20px;
@@ -129,7 +135,8 @@ def main():
 
     # Carousel for pre-generated outputs
     st.markdown('<h3 style="color: #F05524; text-align: center; font-size: 2opx;">Inspiration Gallery</h3>', unsafe_allow_html=True)
-    st.markdown("<div class='carousel'>", unsafe_allow_html=True)
+    st.markdown("<div class='carousel-container'>", unsafe_allow_html=True)
+    
     output_images = sorted(list(pre_generated_outputs.items()))
     current_image_index = st.session_state.get('current_image_index', 0)
     
@@ -145,6 +152,7 @@ def main():
             current_image_index = (current_image_index + 1) % len(output_images)
     
     st.session_state['current_image_index'] = current_image_index
+    st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
 
