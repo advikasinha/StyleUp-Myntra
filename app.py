@@ -33,16 +33,6 @@ def main():
         font-size: 36px;
         font-weight: bold;
     }
-    .logo-image {
-        height: 30px;
-        margin-right: 10px;
-    }
-    .app-name {
-        font-size: 24px;
-        color: #FD913C;
-        font-weight: bold;
-        margin-left: 20px;
-    }
     .content {
         margin-top: 100px; /* Adjust margin to ensure content is below fixed header */
         padding: 16px;
@@ -74,7 +64,7 @@ def main():
     .color-strip {
         height: 5px;
         background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E);
-        margin-bottom: 20px;
+        margin: 20px 0; /* Adjust margin to add spacing around the color strip */
     }
     </style>
     """, unsafe_allow_html=True)
@@ -95,6 +85,9 @@ def main():
 
     # DESIGNER HUB title
     st.markdown('<h1 class="center-title">DESIGNER HUB</h1>', unsafe_allow_html=True)
+
+    # Color strip
+    st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
 
     # Lorem Ipsum block
     st.markdown("""
