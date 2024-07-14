@@ -20,20 +20,23 @@ def main():
     right: 0;
     background: #29303E;
     color: #F13AB1;
-    padding: 10px 16px;
+    padding: 20px 40px; /* Increase padding for better visibility */
     display: flex;
     align-items: center;
     z-index: 1000;
 }
+
 .header img {
-    width: 100px;
+    width: 80px; /* Adjust width for the logo */
     margin-right: 20px;
 }
+
 .header .title {
-    font-size: 36px;
+    font-size: 24px; /* Adjust font size for the title */
     font-weight: bold;
     color: #F13AB1;
 }
+
 .content {
     margin-top: 40px;
     padding: 0 16px;
@@ -80,13 +83,13 @@ def main():
     """, unsafe_allow_html=True)
 
     # # # Header with Myntra logo image and StyleUp text
-    # st.markdown(
-    # """
-    # <div class="header">
-    #     <img src="Myntra_Logo.png" alt="Myntra Logo">
-    #     <div class="title">StyleUp</div>
-    # </div>
-    # """,unsafe_allow_html=True)
+    st.markdown(
+    """
+    <div class="header">
+        <img src="Myntra_Logo.png" alt="Myntra Logo">
+        <div class="title">StyleUp</div>
+    </div>
+    """,unsafe_allow_html=True)
 
     # st.markdown(
     # """
