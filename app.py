@@ -74,14 +74,14 @@ def main():
     </style>
     """, unsafe_allow_html=True)
 
-    # Header with Myntra logo image and StyleUp text
-    st.markdown(
-    """
-    <div class="header">
-        <img src="Myntra-Logo.png" alt="Myntra Logo">
-        <div class="title">StyleUp</div>
-    </div>
-    """,unsafe_allow_html=True)
+    # # Header with Myntra logo image and StyleUp text
+    # st.markdown(
+    # """
+    # <div class="header">
+    #     <img src="Myntra-Logo.png" alt="Myntra Logo">
+    #     <div class="title">StyleUp</div>
+    # </div>
+    # """,unsafe_allow_html=True)
 
     # Main content
     st.markdown('<div class="content">', unsafe_allow_html=True)
