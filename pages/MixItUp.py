@@ -6,7 +6,7 @@ from PIL import Image
 import os
 
 def get_image_list(folder):
-    image_dir = os.path.join(os.path.dirname(__file__), folder)
+    image_dir = os.path.join(os.path.dirname(__file__), '..', 'images', folder)
     images = [f for f in os.listdir(image_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
     return {f"Image {i+1}": os.path.join(image_dir, f) for i, f in enumerate(images)}
 
