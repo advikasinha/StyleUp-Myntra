@@ -101,9 +101,11 @@ def main():
     # File uploaders
     col1, col2 = st.columns(2)
     with col1:
-        content_file = st.file_uploader('Upload your Silhouette', type=["png", "jpg", "jpeg"], help='<p style="color: #F05524; font-style: italic;">Upload your Silhouette</p>')
+        st.markdown('<p style="color: #F05524; font-style: italic; margin-top: 10px;">Upload your Silhouette</p>', unsafe_allow_html=True)
+        content_file = st.file_uploader('', type=["png", "jpg", "jpeg"])  # Empty string for label
     with col2:
-        style_file = st.file_uploader('Upload your Style', type=["png", "jpg", "jpeg"], help='<p style="color: #F05524; font-style: italic;">Upload your Style</p>')
+        st.markdown('<p style="color: #F05524; font-style: italic; margin-top: 10px;">Upload your Style</p>', unsafe_allow_html=True)
+        style_file = st.file_uploader('', type=["png", "jpg", "jpeg"])  # Empty string for label
 
     if content_file and style_file:
         if st.button("Design It!", key="design_button", help="Click to design your image"):
