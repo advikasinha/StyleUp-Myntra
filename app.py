@@ -105,10 +105,10 @@ def main():
     col1, col2 = st.columns(2)
     with col1:
         st.markdown('<span class="upload-label">Upload your Silhouette</span>', unsafe_allow_html=True)
-        content_file = st.file_uploader('', type=["png", "jpg", "jpeg"])  # Empty string for label
+        content_file = st.file_uploader('', type=["png", "jpg", "jpeg"], key='content-file')  # Empty string for label
     with col2:
         st.markdown('<span class="upload-label">Upload your Style</p>', unsafe_allow_html=True)
-        style_file = st.file_uploader('', type=["png", "jpg", "jpeg"])
+        style_file = st.file_uploader('', type=["png", "jpg", "jpeg"], key='style-file')
 
     if content_file and style_file:
         if st.button("Design It!", key="design_button", help="Click to design your image"):
