@@ -169,13 +169,13 @@ def main():
         st.markdown('<span class="upload-label">Select Silhouette</span>', unsafe_allow_html=True)
         silhouette_options = list(silhouettes.keys())
         content_file = st.selectbox("Choose a silhouette", silhouette_options, key="silhouette")
-        st.image(Image.open(silhouettes[content_file]), caption=content_file, width=400, output_format="PNG")
+        st.image(Image.open(silhouettes[content_file]), caption=content_file, width=400, output_format="JPG")
             
     with col2:
         st.markdown('<span class="upload-label">Select Style</span>', unsafe_allow_html=True)
         style_options = sorted(list(styles.keys())) 
         style_file = st.selectbox("Choose a style", style_options, key="style")
-        st.image(Image.open(styles[style_file]), caption=style_file, width=400, output_format="PNG")
+        st.image(Image.open(styles[style_file]), caption=style_file, width=400, output_format="JPG")
         
     if silhouette_options and style_options:
         if st.button("Design It!", key="design_button", help="Click to design your image"):
