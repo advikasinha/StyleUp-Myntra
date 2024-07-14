@@ -34,14 +34,14 @@ def main():
         font-weight: bold;
     }
     .content {
-        margin-top: 100px; /* Adjust margin to ensure content is below fixed header */
-        padding: 16px;
+        margin-top: 120px; /* Adjust margin to ensure content is below fixed header */
+        padding: 0 16px;
     }
     .center-title {
         text-align: center;
         font-size: 36px;
         font-weight: bold;
-        margin: 20px 0;
+        margin: 0;
         color: #29303E;
     }
     .lorem-ipsum {
