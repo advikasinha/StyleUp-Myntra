@@ -10,71 +10,79 @@ def main():
     # Custom CSS
     st.markdown("""
     <style>
-    .stApp {
-        background-color: #FFFFFF;
-    }
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        background: #29303E;
-        color: #F13AB1;
-        padding: 10px 16px;
-        display: flex;
-        align-items: center;
-        z-index: 1000;
-    }
-    .header img {
-        width: 100px;
-        margin-right: 20px;
-    }
-    .header .title {
-        font-size: 36px;
-        font-weight: bold;
-        color: #F13AB1;
-    }
-    .content {
-        margin-top: 40px;
-        padding: 0 16px;
-    }
-    .center-title {
-        text-align: center;
-        font-size: 36px;
-        font-weight: bold;
-        margin: 0;
-        color: #29303E;
-    }
-    .lorem-ipsum {
-        background-color: #f0f0f0;
-        padding: 20px;
-        margin: 20px 0;
-        color: #29303E;
-    }
-    .stButton>button {
-        background-color: #F13AB1;
-        color: white;
-        font-weight: bold;
-        border: none;
-        border-radius: 4px;
-        padding: 10px 20px;
-    }
-    .stButton>button:hover {
-        background-color: #FD913C;
-    }
-    .upload-label {
-        color: black; 
-        text-align: center;
-    }
-    .color-strip {
-        height: 5px;
-        background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E);
-        margin: 20px 0; /* Adjust margin to add spacing around the color strip */
-    }
-    </style>
+.stApp {
+    background-color: #FFFFFF;
+}
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #29303E;
+    color: #F13AB1;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+.header img {
+    width: 100px;
+    margin-right: 20px;
+}
+.header .title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #F13AB1;
+}
+.content {
+    margin-top: 40px;
+    padding: 0 16px;
+}
+.center-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0;
+    color: #29303E;
+}
+.lorem-ipsum {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin: 20px 0;
+    color: #29303E;
+}
+.stButton>button {
+    background-color: #F13AB1;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 24px; /* Adjust padding for better visibility */
+    margin-top: 20px; /* Adjust margin for better alignment */
+}
+.stButton>button:hover {
+    background-color: #FD913C;
+}
+.upload-label {
+    color: black; 
+    text-align: center;
+}
+.color-strip {
+    height: 5px;
+    background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E);
+    margin: 20px 0; /* Adjust margin to add spacing around the color strip */
+}
+</style>
     """, unsafe_allow_html=True)
 
     # # Header with Myntra logo image and StyleUp text
+    st.markdown(
+    """
+    <div class="header">
+        <img src="Myntra_Logo.png" alt="Myntra Logo">
+        <div class="title">StyleUp</div>
+    </div>
+    """,unsafe_allow_html=True)
 
     st.markdown(
     """
