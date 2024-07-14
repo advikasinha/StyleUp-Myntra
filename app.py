@@ -101,9 +101,9 @@ def main():
     # File uploaders
     col1, col2 = st.columns(2)
     with col1:
-        content_file = st.file_uploader('<p style="color: #F05524; font-style: italic;">Upload your Silhouette</p>', type=["png", "jpg", "jpeg"])
+        content_file = st.file_uploader('Upload your Silhouette', type=["png", "jpg", "jpeg"], help='<p style="color: #F05524; font-style: italic;">Upload your Silhouette</p>')
     with col2:
-        style_file = st.file_uploader('<p style="color: #F05524; font-style: italic;">Upload your Style</p>', type=["png", "jpg", "jpeg"])
+        style_file = st.file_uploader('Upload your Style', type=["png", "jpg", "jpeg"], help='<p style="color: #F05524; font-style: italic;">Upload your Style</p>')
 
     if content_file and style_file:
         if st.button("Design It!", key="design_button", help="Click to design your image"):
