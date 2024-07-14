@@ -52,13 +52,16 @@ def main():
     color: #29303E;
 }
 .stButton>button {
-    background-color: #F13AB1;
+    background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E);
     color: white;
     font-weight: bold;
     border: none;
-    border-radius: 4px;
-    padding: 12px 24px; /* Adjust padding for better visibility */
-    margin-top: 20px; /* Adjust margin for better alignment */
+    border-radius: 25px; /* Adjust border radius for a rounded button */
+    padding: 16px 32px; /* Adjust padding for button size */
+    margin: 0 auto; /* Center the button */
+    display: block; /* Ensure it's a block element for margin auto to work */
+    font-size: 18px; /* Adjust font size */
+    cursor: pointer;
 }
 .stButton>button:hover {
     background-color: #FD913C;
