@@ -63,6 +63,7 @@ def main():
     }
     .upload-label {
         color: black; 
+        text-align: center;
     }
     .color-strip {
         height: 5px;
@@ -93,9 +94,12 @@ def main():
     # Lorem Ipsum block
     st.markdown("""
     <div class="lorem-ipsum">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus tortor.
+        <p style="font-size: 16px; line-height: 1.6; color: #333;">Welcome to <strong>Designer Hub</strong>, your ultimate playground on Myntra! Designed for both budding designers and fashion enthusiasts, this platform eliminates the need for traditional mockups.</p>
+        <p style="font-size: 16px; line-height: 1.6; color: #333;">**Create Your Own Design** empowers you to unleash your creativity effortlessly. Simply upload your unique silhouette and pair it with a light-colored style photo to see your vision come to life in vibrant detail!</p>
+        <p style="font-size: 16px; line-height: 1.6; color: #333;">Join us on Designer Hub and transform your fashion aspirations into stunning reality. Dive in and let your imagination run wild!</p>
     </div>
     """, unsafe_allow_html=True)
+
 
     # Create Your Own Designs section
     st.write("")
