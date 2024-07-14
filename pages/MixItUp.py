@@ -32,18 +32,14 @@ st.markdown("""
 }
 
     .stButton>button {
-    background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E);
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 25px; /* Adjust border radius for a rounded button */
-    padding: 16px 32px; /* Adjust padding for button size */
-    margin: 0 auto; /* Center the button */
-    display: block; /* Ensure it's a block element for margin auto to work */
-    font-size: 18px; /* Adjust font size */
-    cursor: pointer;
-                
-}
+        background-color: #F13AB1;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        transition: all 0.3s;
+    }
 .stButton>button:hover {
     background-color: #FD913C;
     .stSelectbox {
@@ -51,15 +47,7 @@ st.markdown("""
         border-radius: 4px;
         border: 1px solid #ddd;
     }
-    h1 {
-        color: #29303E;
-        text-align: center;
-        padding-bottom: 1rem;
-    }
-    h2 {
-        color: #F05524;
-        padding-top: 1rem;
-    }
+
     .stImage {
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
