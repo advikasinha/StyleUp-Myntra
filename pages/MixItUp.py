@@ -146,7 +146,7 @@ def main():
             current_image_index = (current_image_index - 1) % len(output_images)
     with col2:
         name, path = output_images[current_image_index]
-        st.image(Image.open(path), caption=name, width=400, output_format="PNG")
+        st.image(Image.open(path), caption=name, width=1000, output_format="PNG")
     with col3:
         if st.button("Next"):
             current_image_index = (current_image_index + 1) % len(output_images)
