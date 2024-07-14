@@ -48,6 +48,10 @@ st.markdown("""
     .stButton>button:hover {
         background-color: #FD913C;
     }
+            .button-container {
+        display: flex;
+        justify-content: flex-end; /* Aligns the button to the right */
+    }
     .stSelectbox {
         border-radius: 4px;
     }
@@ -142,11 +146,13 @@ def main():
     
     col1, col2, col3 = st.columns([1, 3, 1])
     with col1:
+        st.markdown("<div class='button-container'>", unsafe_allow_html=True)
         if st.button("Previous"):
             current_image_index = (current_image_index - 1) % len(output_images)
+        st.markdown("</div>", unsafe_allow_html=True)
     with col2:
         name, path = output_images[current_image_index]
-        st.image(Image.open(path), caption=name, width=1000, output_format="PNG")
+        st.image(Image.open(path), caption=name, width=800, output_format="PNG")
     with col3:
         if st.button("Next"):
             current_image_index = (current_image_index + 1) % len(output_images)
