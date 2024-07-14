@@ -144,7 +144,7 @@ def main():
                     output_c = style_transfer.run_style_transfer(content_img, style_img, num_steps=500)
                     output = style_transfer.enhance_silhouette(output_c, content_img)
                     output_pil = utils.tensor_to_pil(output)
-                    st.image(output_pil, caption="Your Styled Design", use_column_width=True)
+                    st.image(output_pil, caption="Your Styled Design", width=600, use_column_width=False)
                 except Exception as e:
                     st.error(f"An error occurred during the style transfer process: {str(e)}")
 
