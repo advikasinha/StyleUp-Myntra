@@ -1,11 +1,3 @@
-import streamlit as st
-import torch
-from PIL import Image
-import style_transfer
-import utils
-
-st.set_page_config(page_title="DesignerHub", layout="wide")
-
 def main():
     # Custom CSS with all Myntra logo colors
     st.markdown("""
@@ -20,19 +12,16 @@ def main():
         top: 0;
         width: 100%;
         z-index: 1000;
+        display: flex;
+        align-items: center;
     }
-    .logo-text {
-        font-size: 36px;
-        font-weight: bold;
-        background: linear-gradient(45deg, #F13AB1, #E72744, #FD913C, #F05524);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        display: inline-block;
+    .logo-image {
+        height: 40px;
+        margin-right: 20px;
     }
     .app-name {
         font-size: 24px;
         color: #FD913C;
-        margin-left: 20px;
     }
     .content {
         padding: 16px;
@@ -75,10 +64,10 @@ def main():
     </style>
     """, unsafe_allow_html=True)
 
-    # Header with text-based Myntra logo and DesignerHub text
+    # Header with Myntra logo image and DesignerHub text
     st.markdown("""
     <div class="header">
-        <span class="logo-text">myntra</span>
+        <img src="Myntra-Logo.png" class="logo-image" alt="Myntra Logo">
         <span class="app-name">DesignerHub</span>
     </div>
     <div class="color-strip"></div>
