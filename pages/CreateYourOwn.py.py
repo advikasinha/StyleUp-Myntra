@@ -76,6 +76,12 @@ def main():
     background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E);
     margin: 20px 0; /* Adjust margin to add spacing around the color strip */
 }
+        .footer {
+        text-align: center;
+        padding: 20px;
+        color: #29303E;
+        font-weight: 300;
+    }
 </style>
     """, unsafe_allow_html=True)
 
@@ -132,6 +138,12 @@ def main():
                     st.error(f"An error occurred during the style transfer process: {str(e)}")
 
     st.markdown('</div>', unsafe_allow_html=True)
+
+    st.markdown("""
+<div class="footer">
+    DesignerHub: Empowering fashion designers with cutting-edge AI tools.
+</div>
+""", unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()

@@ -156,7 +156,7 @@ with col1:
 with col2:
     st.markdown("""
     <div class="feature-box">
-        <img src="https://plus.unsplash.com/premium_photo-1681457330049-dcdb2ac363fe?q=80&w=1957&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="AI-aided Designing" class="feature-image">
+        <img src="https://preview.redd.it/just-came-across-these-amazing-ai-generated-dresses-on-v0-tyjw9bjx88h91.jpg?auto=webp&s=7ee40126482dfb83b8de5f2a1d6bf2d818ba39c6" alt="AI-aided Designing" class="feature-image">
         <div class="feature-title">AI-aided Designing</div>
         <div class="feature-description">Let DALL-E generate a unique look. Explore the possibilities of AI-generated fashion and find inspiration for your next design.</div>
         <button class="feature-button">Generate Designs</button>
