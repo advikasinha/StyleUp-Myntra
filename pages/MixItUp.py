@@ -85,6 +85,10 @@ st.markdown("""
         color: #29303E;
         font-weight: 300;
     }
+            .upload-label {
+    color: black; 
+    text-align: center;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -126,7 +130,7 @@ def main():
     pre_generated_outputs = get_image_list("outputs")
 
     # Carousel for pre-generated outputs
-    st.markdown('<h3 style="color: #E72744; text-align: center; font-size: 2opx;">Inspiration Gallery</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: #F05524; text-align: center; font-size: 2opx;">Inspiration Gallery</h3>', unsafe_allow_html=True)
     st.markdown("<div class='carousel'>", unsafe_allow_html=True)
     output_images = list(pre_generated_outputs.items())
     current_image_index = st.session_state.get('current_image_index', 0)
@@ -149,7 +153,7 @@ def main():
     col1, col2 = st.columns(2)
 
     with col1:
-        st.subheader("Select Silhouette")
+        st.markdown('<span class="upload-label">Select Silhouette</span>', unsafe_allow_html=True)
         silhouette_options = list(silhouettes.keys())
         if silhouette_options:
             content_file = st.selectbox("Choose a silhouette", silhouette_options, key="silhouette")
@@ -161,7 +165,7 @@ def main():
             st.error("No silhouettes available")
 
     with col2:
-        st.subheader("Select Style")
+        st.markdown('<span class="upload-label">Select Style</span>', unsafe_allow_html=True)
         style_options = list(styles.keys())
         if style_options:
             style_file = st.selectbox("Choose a style", style_options, key="style")
