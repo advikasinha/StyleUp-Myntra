@@ -14,9 +14,27 @@ st.markdown("""
     }
 
     .stApp {
-        background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
-    }
+    background-color: #FFFFFF;
+}
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #29303E;
+    color: #F13AB1;
+    padding: 20px 30px; /* Adjust padding as needed */
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
 
+.header .title {
+    font-size: 18; /* Adjust font size */
+    font-weight: bold;
+    color: #F13AB1;
+    margin-right: auto; /* Align title to the left */
+}
     h1 {
         color: #F13AB1;
         font-size: 3.5em;
@@ -53,6 +71,13 @@ st.markdown("""
         font-weight: 700;
         margin-bottom: 10px;
     }
+    
+    .lorem-ipsum {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin: 20px 0;
+    color: #29303E;
+}
 
     .feature-description {
         color: #29303E;
@@ -63,10 +88,8 @@ st.markdown("""
     .footer {
         text-align: center;
         padding: 20px;
-        background: linear-gradient(90deg, #F13AB1, #E72744, #FD913C, #F05524, #29303E);
-        color: white;
+        color: #29303E;
         font-weight: 300;
-        margin-top: 50px;
     }
 
     .myntra-gradient {
@@ -101,18 +124,29 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+st.markdown(
+"""
+<div class="header">
+    <div class="title">StyleUp</div>
+</div>
+""", unsafe_allow_html=True)
+
 st.title("Welcome to DesignerHub")
 
 st.markdown('<div class="myntra-gradient"></div>', unsafe_allow_html=True)
-
-st.write("Explore our innovative fashion design tools and features:")
+st.markdown("""
+    <div class="lorem-ipsum">
+        <p style="font-size: 16px; line-height: 1.6; color: #333;">Welcome to <strong>Designer Hub</strong>, your ultimate playground on Myntra! Designed for both budding designers and fashion enthusiasts, this platform eliminates the need for traditional mockups.</p>
+        <p style="font-size: 16px; line-height: 1.6; color: #333;"><strong><em>Explore our innovative fashion design tools and features:</em></strong> 
+    </div>
+    """, unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns(3)
 
 with col1:
     st.markdown("""
     <div class="feature-box">
-        <img src="https://source.unsplash.com/random/400x300/?fashion,design" alt="Create Your Own" class="feature-image">
+        <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b" alt="Create Your Own" class="feature-image">
         <div class="feature-title">Create Your Own</div>
         <div class="feature-description">Transform your designs with AI-powered style transfer. Unleash your creativity and bring your unique fashion ideas to life.</div>
         <button class="feature-button">Start Creating</button>
@@ -122,7 +156,7 @@ with col1:
 with col2:
     st.markdown("""
     <div class="feature-box">
-        <img src="https://source.unsplash.com/random/400x300/?AI,fashion" alt="AI-aided Designing" class="feature-image">
+        <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c" alt="AI-aided Designing" class="feature-image">
         <div class="feature-title">AI-aided Designing</div>
         <div class="feature-description">Let DALL-E generate a unique look. Explore the possibilities of AI-generated fashion and find inspiration for your next design.</div>
         <button class="feature-button">Generate Designs</button>
@@ -132,14 +166,13 @@ with col2:
 with col3:
     st.markdown("""
     <div class="feature-box">
-        <img src="https://source.unsplash.com/random/400x300/?clothing,collection" alt="Mix It Up" class="feature-image">
+        <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5" alt="Mix It Up" class="feature-image">
         <div class="feature-title">Mix It Up</div>
         <div class="feature-description">Choose from Myntra's own exquisite collection. Combine and customize pieces to create your perfect outfit.</div>
         <button class="feature-button">Explore Collection</button>
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown('<div class="myntra-gradient"></div>', unsafe_allow_html=True)
 
 st.markdown("""
 <div class="footer">
