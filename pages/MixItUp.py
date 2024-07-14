@@ -99,6 +99,8 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
+st.write("")
+st.write("")
 
 st.markdown("""
 <div class="header">
