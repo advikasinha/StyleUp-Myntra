@@ -146,7 +146,7 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.markdown("""
     <div class="feature-box">
-        <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b" alt="Create Your Own" class="feature-image">
+        <img src="https://images.unsplash.com/photo-1578353022439-8cbcd4439e6a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Create Your Own" class="feature-image">
         <div class="feature-title">Create Your Own</div>
         <div class="feature-description">Transform your designs with AI-powered style transfer. Unleash your creativity and bring your unique fashion ideas to life.</div>
         <button class="feature-button">Start Creating</button>
