@@ -136,7 +136,17 @@ def main():
             st.image(style_file, caption='Uploaded Style', width=image_width)
 
     if content_file and style_file:
-        if st.button("Design It!", key="design_button", help="Click to design your image"):
+        if st.button("Design It!", key="design_button", help="Click to design your image", 
+             style='background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E); \
+                    color: white; \
+                    font-weight: bold; \
+                    border: none; \
+                    border-radius: 25px; \
+                    padding: 16px 32px; \
+                    margin: 0 auto; \
+                    display: block; \
+                    font-size: 18px; \
+                    cursor: pointer;'):
             with st.spinner("Designing your image..."):
                 try:
                     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
