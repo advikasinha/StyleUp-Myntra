@@ -54,6 +54,12 @@ st.markdown("""
         border-radius: 4px;
         border: 1px solid #ddd;
     }
+            .lorem-ipsum {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin: 20px 0;
+    color: #29303E;
+}
 
     .stImage {
         border-radius: 8px;
@@ -101,7 +107,7 @@ def main():
 
     st.markdown('<h1 class="center-title" style="font-size: 40px;">DESIGNER HUB</h1>', unsafe_allow_html=True)
 
-    #st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
+    st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
 
     st.markdown('<h2 style="color: #F13AB1; text-align: center; font-size: 28px;">Mix It Up</h2>', unsafe_allow_html=True)
 
