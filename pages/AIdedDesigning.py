@@ -1,11 +1,10 @@
 import streamlit as st
 import openai
-import os
 from PIL import Image
 import requests
 from io import BytesIO
 
-# Set your OpenAI API key
+# Set your OpenAI API key from Streamlit secrets
 openai.api_key = st.secrets["openai"]["image-gen-key"]
 
 # Custom CSS (same as previous pages)
@@ -68,11 +67,11 @@ st.markdown("""
 def generate_image(prompt):
     try:
         response = openai.Image.create(
+            model="dall-e-3",
             prompt=prompt,
-            n=1,
-            size="512x512"
+            n=1
         )
-        image_url = response['data'][0]['url']
+        image_url = response['output']['url']
         return image_url
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
@@ -81,11 +80,11 @@ def generate_image(prompt):
 def create_image_variations(image):
     try:
         response = openai.Image.create_variation(
+            model="dall-e-3",
             image=image,
-            n=4,
-            size="512x512"
+            n=4
         )
-        return [variation['url'] for variation in response['data']]
+        return [variation['output']['url'] for variation in response['data']]
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
         return None
