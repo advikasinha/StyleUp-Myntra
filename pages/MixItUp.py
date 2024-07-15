@@ -75,11 +75,29 @@ st.markdown("""
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
+    .carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    }
+
     .carousel {
         background-color: black;
         border-radius: 8px;
-        margin-bottom:1rem;
-        justify-content: center;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .carousel-buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 1rem;
     }
     .gallery-image {
         transition: transform 0.3s ease-in-out;
@@ -153,27 +171,25 @@ def main():
     pre_generated_outputs = get_image_list("outputs")
 
     # Carousel for pre-generated outputs
-    st.markdown('<h3 style="color: #F05524; text-align: center; font-size: 2opx;">Inspiration Gallery</h3>', unsafe_allow_html=True)
-    st.markdown("<div class='carousel'>", unsafe_allow_html=True)
-    
+    st.markdown('<h3 style="color: #F05524; text-align: center; font-size: 20px;">Inspiration Gallery</h3>', unsafe_allow_html=True)
+    st.markdown("<div class='carousel-container'><div class='carousel'>", unsafe_allow_html=True)
+
     output_images = sorted(list(pre_generated_outputs.items()))
     current_image_index = st.session_state.get('current_image_index', 0)
-    
-    col1, col2, col3 = st.columns([1, 3, 1])
+
+    name, path = output_images[current_image_index]
+    st.image(Image.open(path), caption=name, width=500, output_format="PNG")
+
+    col1, col2 = st.columns(2)
     with col1:
-        st.markdown("<div class='button-container'>", unsafe_allow_html=True)
         if st.button("Previous"):
             current_image_index = (current_image_index - 1) % len(output_images)
-        st.markdown("</div>", unsafe_allow_html=True)
     with col2:
-        name, path = output_images[current_image_index]
-        st.image(Image.open(path), caption=name, width=500, output_format="PNG")
-    with col3:
         if st.button("Next"):
             current_image_index = (current_image_index + 1) % len(output_images)
-    
+
     st.session_state['current_image_index'] = current_image_index
-    st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("</div></div>", unsafe_allow_html=True)
 
     st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
 
