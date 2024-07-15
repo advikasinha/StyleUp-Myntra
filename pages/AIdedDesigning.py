@@ -6,6 +6,7 @@ from io import BytesIO
 
 #OpenAI API key from Streamlit secrets
 client = OpenAI(api_key=st.secrets["openai"]["image-gen-key"])
+st.set_page_config(page_title="DesignerHub", layout="wide")
 
 def load_css():
     with open("style.css") as f:
@@ -43,7 +44,7 @@ def create_image_variations(image):
 
 def main():
     load_css()
-    
+
     st.markdown("""
     <div class="header">
         <div class="title">StyleUp</div>

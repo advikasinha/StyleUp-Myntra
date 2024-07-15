@@ -123,7 +123,7 @@ h3 {
 }
 
 .stButton > button:hover {
-  background: linear-gradient(to right, #ff527b, #ff3f6c);
+  background: linear-gradient(to right, #ff527b, #29303e);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(255, 63, 108, 0.3);
 }
@@ -136,16 +136,16 @@ h3 {
 }
 
 .color-strip {
-  height: 4px;
+  height: 5px;
   background: linear-gradient(
     to right,
-    #ff3f6c,
-    #ff527b,
-    #ff6781,
-    #ff7c97,
-    #ff91ad
+    #f13ab1,
+    #e72744,
+    #fd913c,
+    #f05524,
+    #29303e
   );
-  margin: 30px 0;
+  margin: 20px 0;
 }
 
 .footer {
