@@ -204,7 +204,7 @@ def main():
         if content_file:
             content_path = silhouettes[content_file]
             content_img = Image.open(content_path).convert('RGB')
-            st.image(content_img, caption=content_file, width=300, use_column_width=False, output_format="JPEG")
+            st.image(content_img, caption=content_file, width=500, use_column_width=False, output_format="JPEG")
 
     with col2:
         st.markdown('<span class="upload-label">Select Style</span>', unsafe_allow_html=True)
@@ -213,7 +213,7 @@ def main():
         if style_file:
             style_path = styles[style_file]
             style_img = Image.open(style_path).convert('RGB')
-            st.image(style_img, caption=style_file,width=100, use_column_width=False, output_format="JPEG")
+            st.image(style_img, caption=style_file, use_column_width=True, output_format="JPEG")
 
     if st.button("Design It!", key="design_button", help="Click to design your image"):
         if content_file and style_file:
@@ -224,7 +224,7 @@ def main():
                     content_tensor, style_tensor = utils2.load_images(content_path, style_path, device)
                     output_tensor = perform_style_transfer(content_tensor, style_tensor)
                     output_pil = utils2.tensor_to_pil(output_tensor)
-                    st.image(output_pil, caption="Your Styled Design",width=400, use_column_width=False, output_format="PNG")
+                    st.image(output_pil, caption="Your Styled Design",width=800, use_column_width=False, output_format="PNG")
             
                 except Exception as e:
                     st.error(f"An error occurred during the style transfer process: {str(e)}")
