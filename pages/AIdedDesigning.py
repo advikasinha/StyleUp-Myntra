@@ -6,6 +6,7 @@ from io import BytesIO
 
 # Set your OpenAI API key from Streamlit secrets
 openai.api_key = st.secrets["openai"]["image-gen-key"]
+st.set_page_config(page_title="DesignerHub", layout="wide")
 
 # Custom CSS (same as previous pages)
 st.markdown("""
@@ -61,6 +62,16 @@ st.markdown("""
         color: #29303E;
         font-weight: 300;
     }
+    .lorem-ipsum {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin: 20px 0;
+    color: #29303E;
+}
+            .upload-label {
+    color: black; 
+    text-align: center;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -96,16 +107,32 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown('<h1 class="center-title">AIded Designing</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="center-title" style="font-size: 40px;">DESIGNER HUB</h1>', unsafe_allow_html=True)
     st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
 
-    st.markdown("""
-    Let DALL-E generate a unique look. Explore the possibilities of AI-generated fashion and find inspiration for your next design.
-    """)
+    st.markdown('<h3 style="color: #F13AB1; text-align: center; font-size: 28px;">AIded Designing</h2>', unsafe_allow_html=True)
 
-    cloth_type = st.selectbox("Select clothing type", ["T-shirt", "Dress", "Pants", "Jacket", "Skirt"])
-    color = st.color_picker("Select color", "#000000")
-    pattern = st.selectbox("Select pattern", ["Solid", "Striped", "Floral", "Geometric", "Abstract"])
+    st.markdown("""
+    <div class="lorem-ipsum">
+        <p style="font-size: 16px; line-height: 1.6; color: #333;">Welcome to <strong>Designer Hub</strong>, your ultimate playground on Myntra! Designed for both budding designers and fashion enthusiasts, this platform eliminates the need for traditional mockups.</p>
+        <p style="font-size: 16px; line-height: 1.6; color: #333;"><strong><em>AIded Designing</em></strong> lets DALL-E generate a unique look, allowing you to explore the possibilities of AI-generated fashion and find inspiration for your next design!</p>
+        <p style="font-size: 16px; line-height: 1.6; color: #29303E; text-align: center;">Dive in and let your imagination run wild!</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.write("")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.markdown('<span class="upload-label">Select clothing type</span>', unsafe_allow_html=True)
+        cloth_type = st.selectbox("", ["T-shirt", "Dress", "Pants", "Jacket", "Skirt"])
+    with col2:
+        st.markdown('<span class="upload-label">Select clothing type</span>', unsafe_allow_html=True)
+        color = st.color_picker("", "#000000")
+    with col3:
+        st.markdown('<span class="upload-label">Select pattern</span>', unsafe_allow_html=True)
+        pattern = st.selectbox("", ["Solid", "Striped", "Floral", "Geometric", "Abstract"])
 
     if st.button("Generate Design"):
         prompt = f"A {color} {pattern.lower()} {cloth_type.lower()} design, fashion illustration style"
@@ -129,7 +156,11 @@ def main():
                         cols[i % 2].image(var_url, caption=f"Variation {i+1}", use_column_width=True)
 
     st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
-    st.markdown('<div class="footer">© 2024 StyleUp. All rights reserved.</div>', unsafe_allow_html=True)
+    st.markdown("""
+<div class="footer">
+    DesignerHub: Empowering fashion designers with cutting-edge AI tools.
+</div>
+""", unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
