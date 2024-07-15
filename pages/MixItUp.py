@@ -213,8 +213,9 @@ def main():
         if style_file:
             style_path = styles[style_file]
             style_img = Image.open(style_path).convert('RGB')
-            st.image(style_img, caption=style_file, use_column_width=100, output_format="JPEG")
-
+            style_img.thumbnail((200, 200))  # Resize to 200x200, maintaining aspect ratio
+            st.image(style_img, caption=style_file, use_column_width=False, output_format="JPEG")
+            
     if st.button("Design It!", key="design_button", help="Click to design your image"):
         if content_file and style_file:
             with st.spinner("Designing your image..."):
