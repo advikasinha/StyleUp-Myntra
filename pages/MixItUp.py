@@ -7,6 +7,8 @@ from PIL import Image
 import os
 import time
 
+st.set_page_config(page_title="DesignerHub", layout="wide")
+
 # Custom CSS
 st.markdown("""
 <style>
