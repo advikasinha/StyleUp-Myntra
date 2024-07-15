@@ -95,17 +95,20 @@ def main():
             current_dir = os.path.dirname(os.path.abspath(__file__))
             image_folder = os.path.join(current_dir, "DALL-E-gen")
             image_files = [f for f in os.listdir(image_folder) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
+            num_loops=2
             
             if image_files:
                 image_container = st.empty()
-                while True:
+                for _ in range(num_loops):
                     for image_file in image_files:
                         image_path = os.path.join(image_folder, image_file)
                         img = Image.open(image_path)
                         col1, col2, col3 = st.columns([1,2,1])
                         with col2:
-                            image_container.image(img, use_column_width=True)
-                        time.sleep(3)  # Display each image for 3 seconds
+                            image_container.image(img, width=500, use_column_width=False)
+                        time.sleep(2)
+                
+                st.write("Slideshow finished.")
             else:
                 st.write("No images found in the DALL-E-gen folder.")
 
