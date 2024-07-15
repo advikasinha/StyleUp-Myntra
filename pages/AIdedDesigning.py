@@ -116,7 +116,8 @@ def main():
     <div class="lorem-ipsum">
         <p style="font-size: 16px; line-height: 1.6; color: #333;">Welcome to <strong>Designer Hub</strong>, your ultimate playground on Myntra! Designed for both budding designers and fashion enthusiasts, this platform eliminates the need for traditional mockups.</p>
         <p style="font-size: 16px; line-height: 1.6; color: #333;"><strong><em>AIded Designing</em></strong> lets DALL-E generate a unique look, allowing you to explore the possibilities of AI-generated fashion and find inspiration for your next design!</p>
-        <p style="font-size: 16px; line-height: 1.6; color: #29303E; text-align: center;">Dive in and let your imagination run wild!</p>
+        <p style="font-size: 16px; line-height: 1.6; color: #333;">Make your selections to bring your vision to life. View the generated design and create variations, exploring multiple renditions of your unique style.</p>
+        <p style="font-size: 16px; line-height: 1.6; color: #29303E; text-align: center;">Craft stunning looks with the power of AI magic!</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -134,9 +135,12 @@ def main():
         st.markdown('<span class="upload-label">Select pattern</span>', unsafe_allow_html=True)
         pattern = st.selectbox("", ["Solid", "Striped", "Floral", "Geometric", "Abstract"])
 
+    custom_specification = st.text_area("Add any custom specifications", placeholder="e.g., Vintage style, asymmetrical cuts")
+
     if st.button("Generate Design"):
-        prompt = f"A {color} {pattern.lower()} {cloth_type.lower()} design, fashion illustration style"
+        prompt = f"A {color} {pattern.lower()} {cloth_type.lower()} design, {custom_specification}, fashion illustration style"
         image_url = generate_image(prompt)
+
 
         if image_url:
             st.image(image_url, caption="Generated Design", use_column_width=True)
