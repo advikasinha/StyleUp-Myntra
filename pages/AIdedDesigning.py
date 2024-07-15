@@ -26,7 +26,7 @@ def generate_image(prompt):
         error_message = str(e)
         if "billing_hard_limit_reached" in error_message:
             st.markdown('<div style="background-color: #29303e; padding: 10px; border-radius: 5px;">'
-                        '<p style="color: f13ab1; text-align: center;">We\'ve reached our daily limit for image generation.</p>'
+                        '<p style="color: f13ab1; text-align: center;">Sorry, we\'ve reached our daily limit for image generation.</p>'
                         '</div>', unsafe_allow_html=True)
         else:
             st.error(f"An error occurred: {error_message}")
@@ -84,7 +84,7 @@ def main():
     custom_specification = st.text_area("Add any custom specifications", placeholder="e.g., Vintage style, asymmetrical cuts")
 
     if st.button("Generate Design"):
-        prompt = f"A {color} {pattern.lower()} {cloth_type.lower()} design, {custom_specification}, fashion illustration style"
+        prompt=f'Fashion illustration of {pattern.lower()} {color} colored {cloth_type.lower()}, high quality, detailed design, fashion illustration, abstract, professional, vibrant colors, artistic style, elegant, flowing fabric, intricate details, beautiful, modern, colorful, fashion design, stylish, high-res, intricate patterns, fashion illustration style, vibrant lighting'
         image_url = generate_image(prompt)
         if image_url==None:
             st.markdown("""<div class='lorem-ipsum'> <p style="font-size: 16px; line-height: 1.6; color: #333;">Explore our previous creations by the same prompt meanwhile: </p>  
