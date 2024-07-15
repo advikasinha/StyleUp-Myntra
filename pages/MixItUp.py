@@ -185,9 +185,8 @@ def main():
         if content_file:
             content_path = silhouettes[content_file]
             content_img = Image.open(content_path).convert('RGB')
-            st.image(content_img, caption=content_file, width=400, output_format="JPEG")
+            st.image(content_img, caption=content_file, use_column_width=True, output_format="JPEG")
 
-    # Column 2: Select Style
     with col2:
         st.markdown('<span class="upload-label">Select Style</span>', unsafe_allow_html=True)
         style_options = sorted(list(styles.keys())) 
@@ -195,15 +194,11 @@ def main():
         if style_file:
             style_path = styles[style_file]
             style_img = Image.open(style_path).convert('RGB')
-            st.image(style_img, caption=style_file, width=400, output_format="JPEG")
+            st.image(style_img, caption=style_file, use_column_width=True, output_format="JPEG")
 
-    # Style Transfer Button
-    current_time = time.time()
-    button_key = f"design_button_{current_time}"
-
-    if silhouette_options and style_options:
-        if st.button("Design It!", key=button_key):
-            with st.spinner("Designing your image..."):
+    if st.button("Design It!", key="design_button", help="Click to design your image"):
+        if content_file and style_file:
+            with st.spinner('<span class="upload-label">Designing Your Image..</span>'):
                 try:
                     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
                     st.write(f"Device being used: {device}")
@@ -215,18 +210,15 @@ def main():
                     else:
                         st.write(f"Content tensor shape: {content_tensor.shape}")
                         st.write(f"Style tensor shape: {style_tensor.shape}")
-                        output = perform_style_transfer(content_tensor, style_tensor)
-                        output_pil = utils2.tensor_to_pil(output)
-                        st.session_state['output_image'] = output_pil
-                        st.session_state['last_run_time'] = current_time
+                        output_tensor = perform_style_transfer(content_tensor, style_tensor)
+                        output_pil = utils2.tensor_to_pil(output_tensor)
+                        st.image(output_pil, caption="Your Styled Design", use_column_width=True, output_format="PNG")
                 
                 except Exception as e:
                     st.error(f"An error occurred during the style transfer process: {str(e)}")
                     st.exception(e)
-
-    # Display the output image if it exists
-    if st.session_state['output_image'] is not None:
-        st.image(st.session_state['output_image'], caption=f"Your Styled Design (Last updated: {st.session_state['last_run_time']})", width=600, use_column_width=False, output_format="PNG")
+        else:
+            st.warning("Please select both a silhouette and a style before clicking 'Design It!'")
 
     st.markdown("""
 <div class="footer">
