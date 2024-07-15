@@ -1,9 +1,15 @@
 import streamlit as st
 import torch
+import torchvision
 import utils2
 import style_transfer
 from PIL import Image
 import os
+
+st.write(f"PyTorch version: {torch.__version__}")
+st.write(f"Torchvision version: {torchvision.__version__}")
+st.write(f"PIL version: {PIL.__version__}")
+st.write(f"CUDA available: {torch.cuda.is_available()}")
 
 # Custom CSS
 st.markdown("""
@@ -174,22 +180,26 @@ def main():
         st.markdown('<span class="upload-label">Select Silhouette</span>', unsafe_allow_html=True)
         silhouette_options = list(silhouettes.keys())
         content_file = st.selectbox("Choose a silhouette", silhouette_options, key="silhouette")
-        try:
-            content_img = Image.open(silhouettes[content_file])
+        if content_file:
+            content_path = silhouettes[content_file]
+            st.write(f"Content image path: {content_path}")
+            content_img = Image.open(content_path).convert('RGB')
+            st.write(f"Content image type: {type(content_img)}")
+            st.write(f"Content image size: {content_img.size}")
             st.image(content_img, caption=content_file, width=400, output_format="JPEG")
-        except Exception as e:
-            st.error(f"Error loading silhouette image: {str(e)}")
 
     # Column 2: Select Style
     with col2:
         st.markdown('<span class="upload-label">Select Style</span>', unsafe_allow_html=True)
         style_options = sorted(list(styles.keys())) 
         style_file = st.selectbox("Choose a style", style_options, key="style")
-        try:
-            style_img = Image.open(styles[style_file])
+        if style_file:
+            style_path = styles[style_file]
+            st.write(f"Style image path: {style_path}")
+            style_img = Image.open(style_path).convert('RGB')
+            st.write(f"Style image type: {type(style_img)}")
+            st.write(f"Style image size: {style_img.size}")
             st.image(style_img, caption=style_file, width=400, output_format="JPEG")
-        except Exception as e:
-            st.error(f"Error loading style image: {str(e)}")
 
     # Style Transfer Button
     if silhouette_options and style_options:
@@ -197,12 +207,18 @@ def main():
             with st.spinner("Designing your image..."):
                 try:
                     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+                    st.write(f"Device being used: {device}")
                     
-                    content_tensor, style_tensor = utils2.load_images(content_img, style_img, device)
+                    content_tensor, style_tensor = utils2.load_images(content_path, style_path, device)
                     
-                    if content_tensor is None or style_tensor is None:
-                        st.error("Failed to load content or style image into tensors.")
-                    else:
+                    if content_tensor is None:
+                        st.error("Failed to load content image into tensor.")
+                    if style_tensor is None:
+                        st.error("Failed to load style image into tensor.")
+                    
+                    if content_tensor is not None and style_tensor is not None:
+                        st.write(f"Content tensor shape: {content_tensor.shape}")
+                        st.write(f"Style tensor shape: {style_tensor.shape}")
                         output = perform_style_transfer(content_tensor, style_tensor)
                         output_pil = utils2.tensor_to_pil(output)
                         st.image(output_pil, caption="Your Styled Design", width=600, use_column_width=False, output_format="PNG")
