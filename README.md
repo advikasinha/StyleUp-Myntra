@@ -3,6 +3,10 @@
 
 [Experience the Future of Fashion Design on our Streamlit App](https://styleup-designer.streamlit.app/)
 
+Check out the Technological Flow of our Solution: Navigate to `video-demos/technological-flow.mp4`
+
+Check out the Demo of our Functioning Prototype : Navigate to `video-demos/DesignerHub-demo.mp4`
+
 ## 🌟 Empowering the Next Generation of Fashion Designers
 
 Welcome to DesignerHub, a groundbreaking platform meticulously crafted for the prestigious Myntra HackerRamp. Our mission is to revolutionize the fashion industry by providing cutting-edge AI tools that empower GenZ designers to express their unique creativity and authenticity through personalized fashion creations.
@@ -27,7 +31,7 @@ DesignerHub isn't just a tool; it's a catalyst for change in the fashion industr
 
 ### 1. Create Your Own: Where Your Vision Meets AI Artistry
 
-Harness the power of Neural Style Transfer (NST) to breathe life into your wildest fashion dreams.
+Harness the power of Neural Style Transfer (NST), using the pretrained VGG model and custom loss functions, to breathe life into your wildest fashion dreams.
 
 **How it works:**
 1. Upload your unique silhouette - the canvas for your creativity
@@ -37,7 +41,8 @@ Harness the power of Neural Style Transfer (NST) to breathe life into your wilde
 **Ready to dive in?** Access our NST model:
 1. Navigate to the `NST` directory in this repository
 2. Fire up `NST.ipynb` in Google Colab
-3. Follow the step-by-step instructions to bring your designs to life
+3. Upload your silhouette and style image onto Colab
+4. Change the `content_path` variable and `style_path` variable to reflect the names of your uploaded files and run the code to see the magic!
 
 ### 2. AI-ded Designing: DALL-E Meets Fashion Forward Thinking
 
