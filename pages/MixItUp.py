@@ -6,11 +6,6 @@ import style_transfer
 from PIL import Image
 import os
 
-st.write(f"PyTorch version: {torch.__version__}")
-st.write(f"Torchvision version: {torchvision.__version__}")
-# st.write(f"PIL version: {PIL.__version__}")
-st.write(f"CUDA available: {torch.cuda.is_available()}")
-
 # Custom CSS
 st.markdown("""
 <style>
@@ -182,10 +177,7 @@ def main():
         content_file = st.selectbox("Choose a silhouette", silhouette_options, key="silhouette")
         if content_file:
             content_path = silhouettes[content_file]
-            st.write(f"Content image path: {content_path}")
             content_img = Image.open(content_path).convert('RGB')
-            st.write(f"Content image type: {type(content_img)}")
-            st.write(f"Content image size: {content_img.size}")
             st.image(content_img, caption=content_file, width=400, output_format="JPEG")
 
     # Column 2: Select Style
@@ -195,10 +187,7 @@ def main():
         style_file = st.selectbox("Choose a style", style_options, key="style")
         if style_file:
             style_path = styles[style_file]
-            st.write(f"Style image path: {style_path}")
             style_img = Image.open(style_path).convert('RGB')
-            st.write(f"Style image type: {type(style_img)}")
-            st.write(f"Style image size: {style_img.size}")
             st.image(style_img, caption=style_file, width=400, output_format="JPEG")
 
     # Style Transfer Button
@@ -207,18 +196,9 @@ def main():
             with st.spinner("Designing your image..."):
                 try:
                     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-                    st.write(f"Device being used: {device}")
-                    
                     content_tensor, style_tensor = utils2.load_images(content_path, style_path, device)
-                    
-                    if content_tensor is None:
-                        st.error("Failed to load content image into tensor.")
-                    if style_tensor is None:
-                        st.error("Failed to load style image into tensor.")
-                    
+
                     if content_tensor is not None and style_tensor is not None:
-                        st.write(f"Content tensor shape: {content_tensor.shape}")
-                        st.write(f"Style tensor shape: {style_tensor.shape}")
                         output = perform_style_transfer(content_tensor, style_tensor)
                         output_pil = utils2.tensor_to_pil(output)
                         st.image(output_pil, caption="Your Styled Design", width=600, use_column_width=False, output_format="PNG")
