@@ -86,6 +86,9 @@ def main():
     if st.button("Generate Design"):
         prompt = f"A {color} {pattern.lower()} {cloth_type.lower()} design, {custom_specification}, fashion illustration style"
         image_url = generate_image(prompt)
+        if image_url==None:
+            st.markdown("""<div class='lorem-ipsum'> <p style="font-size: 16px; line-height: 1.6; color: #333;">Explore our previous creations by the same prompt meanwhile: </p>  
+            </div>""", unsafe_allow_html=True)
 
         if image_url:
             st.image(image_url, caption="Generated Design", use_column_width=True)
