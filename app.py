@@ -34,6 +34,18 @@ st.markdown("""
     color: #F13AB1;
     margin-right: auto; /* Align title to the left */
 }
+            
+                .nav-item {
+        display: inline-block;
+        margin-right: 20px;
+        color: #FFFFFF;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+    .nav-item:hover {
+        color: #FF3F6C;
+    }
     h1 {
         color: #F13AB1;
         font-size: 3.5em;
@@ -123,10 +135,14 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown(
-"""
+st.markdown("""
 <div class="header">
-    <div class="title">StyleUp</div>
+    <span class="logo">StyleUp</span>
+    <a href="#" class="nav-item">View Catalogue</a>
+    <a href="#" class="nav-item">Look Of The Week</a>
+    <a href="#" class="nav-item">Trending</a>
+    <a href="#" class="nav-item">My Designs</a>
+    <a href="#" class="nav-item">Help</a>
 </div>
 """, unsafe_allow_html=True)
 
