@@ -89,7 +89,7 @@ def main():
         prompt=f'Fashion illustration of {pattern.lower()} {color} colored {cloth_type.lower()}, high quality, detailed design, fashion illustration, abstract, professional, vibrant colors, artistic style, elegant, flowing fabric, intricate details, beautiful, modern, colorful, fashion design, stylish, high-res, intricate patterns, fashion illustration style, vibrant lighting'
         image_url = generate_image(prompt)
         if image_url is None:
-            st.markdown("""<div class='lorem-ipsum'> <p style="font-size: 16px; line-height: 1.6; color: #333;">Explore our previous creations by similar prompts meanwhile: </p>  
+            st.markdown("""<div class='lorem-ipsum'> <p style="font-size: 16px; line-height: 1.6; color: #333; text-align: center;">Explore our previous creations by similar prompts meanwhile: </p>  
                 </div>""", unsafe_allow_html=True)
 
             current_dir = os.path.dirname(os.path.abspath(__file__))
