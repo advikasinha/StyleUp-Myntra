@@ -79,6 +79,7 @@ st.markdown("""
         background-color: black;
         border-radius: 8px;
         margin-bottom:1rem;
+        justify-content: center;
     }
     .gallery-image {
         transition: transform 0.3s ease-in-out;
@@ -153,7 +154,7 @@ def main():
 
     # Carousel for pre-generated outputs
     st.markdown('<h3 style="color: #F05524; text-align: center; font-size: 2opx;">Inspiration Gallery</h3>', unsafe_allow_html=True)
-    st.markdown("<div class='carousel-container'>", unsafe_allow_html=True)
+    st.markdown("<div class='carousel'>", unsafe_allow_html=True)
     
     output_images = sorted(list(pre_generated_outputs.items()))
     current_image_index = st.session_state.get('current_image_index', 0)
