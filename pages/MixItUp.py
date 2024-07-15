@@ -118,10 +118,10 @@ def get_image_list(folder):
     images = [f for f in os.listdir(image_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
     return {os.path.splitext(f)[0]: os.path.join(image_dir, f) for f in images}
 
-@st.cache_data
-def perform_style_transfer(content_tensor, style_tensor, num_steps=500):
-    output_c = style_transfer.run_style_transfer(content_tensor, style_tensor, num_steps=num_steps)
-    return style_transfer.enhance_silhouette(output_c, content_tensor)
+@st.cache_resource
+def perform_style_transfer(_content_tensor, _style_tensor, num_steps=500):
+    output_c = style_transfer.run_style_transfer(_content_tensor, _style_tensor, num_steps=num_steps)
+    return style_transfer.enhance_silhouette(output_c, _content_tensor)
 
 def main():
 
