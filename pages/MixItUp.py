@@ -76,59 +76,27 @@ st.markdown("""
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 .carousel-container {
-        position: relative;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-    .carousel-item {
-        display: none;
-    }
-    .carousel-item.active {
-        display: block;
-    }
-    .carousel-item img {
-        width: 100%;
-        height: auto;
-    }
-    .carousel-control {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: rgba(0,0,0,0.5);
-        color: white;
-        padding: 10px;
-        text-decoration: none;
-    }
-    .carousel-control:hover {
-        background-color: rgba(0,0,0,0.8);
-    }
-    .carousel-control-prev {
-        left: 10px;
-    }
-    .carousel-control-next {
-        right: 10px;
-    }
-    .carousel-indicators {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        justify-content: center;
-        padding: 0;
-        margin: 0;
-    }
-    .carousel-indicator {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: rgba(255,255,255,0.5);
-        margin: 0 5px;
-        cursor: pointer;
-    }
-    .carousel-indicator.active {
-        background-color: white;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 2rem auto;
+    max-width: 600px;
+}
+
+.carousel-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.carousel-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 300px;
+}
     .gallery-image {
         transition: transform 0.3s ease-in-out;
     }
@@ -208,40 +176,27 @@ def main():
     pre_generated_outputs = get_image_list("outputs")
 
     # Carousel for pre-generated outputs
-    if 'current_image_index' not in st.session_state:
-        st.session_state.current_image_index = 0
-
     st.markdown('<h3 style="color: #F05524; text-align: center; font-size: 24px;">Inspiration Gallery</h3>', unsafe_allow_html=True)
 
-    st.markdown('<div class="carousel-container">', unsafe_allow_html=True)
+    output_images = sorted(list(pre_generated_outputs.items()))
+    current_image_index = st.session_state.get('current_image_index', 0)
 
-    for i, (name, path) in enumerate(pre_generated_outputs):
-        active_class = 'active' if i == st.session_state.current_image_index else ''
-        st.markdown(f'<div class="carousel-item {active_class}">', unsafe_allow_html=True)
-        st.image(Image.open(path), caption=name, use_column_width=True)
-        st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown("<div class='carousel-container'>", unsafe_allow_html=True)
 
-    st.markdown('<a class="carousel-control carousel-control-prev" href="#" role="button" id="prev">❮</a>', unsafe_allow_html=True)
-    st.markdown('<a class="carousel-control carousel-control-next" href="#" role="button" id="next">❯</a>', unsafe_allow_html=True)
+    name, path = output_images[current_image_index]
+    st.image(Image.open(path), use_column_width=True, output_format="PNG", clamp=True)
+    st.markdown(f"<p class='image-caption'>{name}</p>", unsafe_allow_html=True)
 
-    st.markdown('<div class="carousel-indicators">', unsafe_allow_html=True)
-    for i in range(len(pre_generated_outputs)):
-        active_class = 'active' if i == st.session_state.current_image_index else ''
-        st.markdown(f'<div class="carousel-indicator {active_class}" data-index="{i}"></div>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    # Handle navigation
     col1, col2 = st.columns(2)
     with col1:
         if st.button("Previous"):
-            st.session_state.current_image_index = (st.session_state.current_image_index - 1) % len(output_images)
-            st.experimental_rerun()
+            current_image_index = (current_image_index - 1) % len(output_images)
     with col2:
         if st.button("Next"):
-            st.session_state.current_image_index = (st.session_state.current_image_index + 1) % len(output_images)
-            st.experimental_rerun()
+            current_image_index = (current_image_index + 1) % len(output_images)
+
+    st.session_state['current_image_index'] = current_image_index
+    st.markdown("</div>", unsafe_allow_html=True)
 
     st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
 
