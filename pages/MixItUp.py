@@ -5,6 +5,7 @@ import utils2
 import style_transfer
 from PIL import Image
 import os
+import time
 
 # Custom CSS
 st.markdown("""
@@ -102,6 +103,11 @@ st.markdown("""
 """, unsafe_allow_html=True)
 st.write("")
 
+if 'last_run_time' not in st.session_state:
+    st.session_state['last_run_time'] = 0
+if 'output_image' not in st.session_state:
+    st.session_state['output_image'] = None
+
 st.markdown("""
 <div class="header">
     <div class="title">StyleUp</div>
@@ -190,22 +196,35 @@ def main():
             st.image(style_img, caption=style_file, width=400, output_format="JPEG")
 
     # Style Transfer Button
-    button_key = f"design_button_{content_file}_{style_file}"
+    current_time = time.time()
+    button_key = f"design_button_{current_time}"
 
     if silhouette_options and style_options:
         if st.button("Design It!", key=button_key):
             with st.spinner("Designing your image..."):
                 try:
-                    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")                    
+                    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+                    st.write(f"Device being used: {device}")
+                    
                     content_tensor, style_tensor = utils2.load_images(content_path, style_path, device)
                     
-                    output = perform_style_transfer(content_tensor, style_tensor)
-                    output_pil = utils2.tensor_to_pil(output)
-                    st.image(output_pil, caption="Your Styled Design", width=600, use_column_width=False, output_format="PNG")
+                    if content_tensor is None or style_tensor is None:
+                        st.error("Failed to load images into tensors.")
+                    else:
+                        st.write(f"Content tensor shape: {content_tensor.shape}")
+                        st.write(f"Style tensor shape: {style_tensor.shape}")
+                        output = perform_style_transfer(content_tensor, style_tensor)
+                        output_pil = utils2.tensor_to_pil(output)
+                        st.session_state['output_image'] = output_pil
+                        st.session_state['last_run_time'] = current_time
                 
                 except Exception as e:
                     st.error(f"An error occurred during the style transfer process: {str(e)}")
                     st.exception(e)
+
+    # Display the output image if it exists
+    if st.session_state['output_image'] is not None:
+        st.image(st.session_state['output_image'], caption=f"Your Styled Design (Last updated: {st.session_state['last_run_time']})", width=600, use_column_width=False, output_format="PNG")
 
     st.markdown("""
 <div class="footer">
