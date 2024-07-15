@@ -70,6 +70,6 @@ NST is not just a technology; it's the bridge between art and fashion. This deep
 DALL-E, the revolutionary AI model by OpenAI, is the cornerstone of our "AI-ded Designing" feature. It takes your textual descriptions and transforms them into visual masterpieces. With DALL-E, the only limit is your imagination. Describe your dream outfit, and watch as AI brings it to life before your eyes.
 
 
-
+[Demo deployment of our Streamlit App, with no voiceover](https://drive.google.com/drive/folders/1l2ZNdf9lR9q8TDTDXtVdb195ez2oLicL?usp=drive_link)
 
 Join us in redefining the future of fashion, one design at a time. Welcome to DesignerHub - where AI meets style, and imagination knows no bounds!
