@@ -3,6 +3,8 @@ from openai import OpenAI
 from PIL import Image
 import requests
 from io import BytesIO
+import os
+import base64
 
 #OpenAI API key from Streamlit secrets
 client = OpenAI(api_key=st.secrets["openai"]["image-gen-key"])
@@ -89,6 +91,65 @@ def main():
         if image_url==None:
             st.markdown("""<div class='lorem-ipsum'> <p style="font-size: 16px; line-height: 1.6; color: #333;">Explore our previous creations by the same prompt meanwhile: </p>  
             </div>""", unsafe_allow_html=True)
+            image_folder = "DALL-E-gen"
+            image_files = [f for f in os.listdir(image_folder) if f.endswith(('.png', '.jpg', '.jpeg'))]
+            
+            if image_files:
+                st.markdown("""
+                <style>
+                    .slideshow-container {
+                        max-width: 500px;
+                        position: relative;
+                        margin: auto;
+                    }
+                    .mySlides {
+                        display: none;
+                    }
+                    .fade {
+                        animation-name: fade;
+                        animation-duration: 1.5s;
+                    }
+                    @keyframes fade {
+                        from {opacity: .4} 
+                        to {opacity: 1}
+                    }
+                </style>
+                <div class="slideshow-container">
+                """, unsafe_allow_html=True)
+                
+                for i, image_file in enumerate(image_files):
+                    image_path = os.path.join(image_folder, image_file)
+                    img = Image.open(image_path)
+                    img.thumbnail((500, 500))  # Resize image to 500px max
+                    buffered = BytesIO()
+                    img.save(buffered, format="PNG")
+                    img_str = base64.b64encode(buffered.getvalue()).decode()
+                    st.markdown(f'''
+                        <div class="mySlides fade">
+                            <img src="data:image/png;base64,{img_str}" style="width:100%">
+                        </div>
+                    ''', unsafe_allow_html=True)
+                
+                st.markdown("""
+                </div>
+                <script>
+                    var slideIndex = 0;
+                    showSlides();
+                    
+                    function showSlides() {
+                        var i;
+                        var slides = document.getElementsByClassName("mySlides");
+                        for (i = 0; i < slides.length; i++) {
+                            slides[i].style.display = "none";  
+                        }
+                        slideIndex++;
+                        if (slideIndex > slides.length) {slideIndex = 1}    
+                        slides[slideIndex-1].style.display = "block";  
+                        setTimeout(showSlides, 3000); // Change image every 3 seconds
+                    }
+                </script>
+                """, unsafe_allow_html=True)
+
 
         if image_url:
             st.image(image_url, caption="Generated Design", use_column_width=True)
