@@ -166,7 +166,7 @@ def main():
         st.markdown("</div>", unsafe_allow_html=True)
     with col2:
         name, path = output_images[current_image_index]
-        st.image(Image.open(path), caption=name, width=800, output_format="PNG")
+        st.image(Image.open(path), caption=name, width=500, output_format="PNG")
     with col3:
         if st.button("Next"):
             current_image_index = (current_image_index + 1) % len(output_images)
@@ -185,7 +185,7 @@ def main():
         if content_file:
             content_path = silhouettes[content_file]
             content_img = Image.open(content_path).convert('RGB')
-            st.image(content_img, caption=content_file, use_column_width=True, output_format="JPEG")
+            st.image(content_img, caption=content_file, use_column_width=300, output_format="JPEG")
 
     with col2:
         st.markdown('<span class="upload-label">Select Style</span>', unsafe_allow_html=True)
@@ -194,26 +194,19 @@ def main():
         if style_file:
             style_path = styles[style_file]
             style_img = Image.open(style_path).convert('RGB')
-            st.image(style_img, caption=style_file, use_column_width=True, output_format="JPEG")
+            st.image(style_img, caption=style_file, use_column_width=300, output_format="JPEG")
 
     if st.button("Design It!", key="design_button", help="Click to design your image"):
         if content_file and style_file:
-            with st.spinner('<span class="upload-label">Designing Your Image..</span>'):
+            with st.spinner("Designing your image..."):
                 try:
                     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-                    st.write(f"Device being used: {device}")
                     
                     content_tensor, style_tensor = utils2.load_images(content_path, style_path, device)
-                    
-                    if content_tensor is None or style_tensor is None:
-                        st.error("Failed to load images into tensors.")
-                    else:
-                        st.write(f"Content tensor shape: {content_tensor.shape}")
-                        st.write(f"Style tensor shape: {style_tensor.shape}")
-                        output_tensor = perform_style_transfer(content_tensor, style_tensor)
-                        output_pil = utils2.tensor_to_pil(output_tensor)
-                        st.image(output_pil, caption="Your Styled Design", use_column_width=True, output_format="PNG")
-                
+                    output_tensor = perform_style_transfer(content_tensor, style_tensor)
+                    output_pil = utils2.tensor_to_pil(output_tensor)
+                    st.image(output_pil, caption="Your Styled Design", use_column_width=400, output_format="PNG")
+            
                 except Exception as e:
                     st.error(f"An error occurred during the style transfer process: {str(e)}")
                     st.exception(e)
