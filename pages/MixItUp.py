@@ -50,7 +50,7 @@ st.markdown("""
         transition: all 0.3s;
     }
     .stButton>button:hover {
-        background-color: #29303E;
+        background-color: #FD913C;
     }
             .button-container {
         display: flex;
@@ -71,43 +71,27 @@ st.markdown("""
         margin: 20px 0;
         color: #29303E;
     }
-.carousel-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 600px;  /* Adjust this value based on your needs */
-    }
-    .button-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-    }
-    .image-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-    }
-    .stButton > button {
-        height: 50px;
-        width: 100px;
-    }
     .stImage {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-    .stImage > img {
-        max-width: 100%;
-        max-height: 500px;  /* Adjust this value based on your needs */
-        object-fit: contain;
-    }
-    .stImage > div:last-child {
-        text-align: center;
-        margin-top: 10px;
-    }
+.carousel-container .stImage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-container img {
+    max-width: 100%;
+    height: auto;
+}
+            .carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
 
 .stButton > button {
     height: 100%;
@@ -193,25 +177,19 @@ def main():
     output_images = sorted(list(pre_generated_outputs.items()))
     current_image_index = st.session_state.get('current_image_index', 0)
 
-    col1, col2, col3 = st.columns([1, 4, 1])  # Adjust the ratios as needed
+    col1, col2, col3 = st.columns([1, 3, 1])  # Adjust the ratios as needed
 
     with col1:
-        st.markdown('<div class="button-container">', unsafe_allow_html=True)
         if st.button("Previous"):
             current_image_index = (current_image_index - 1) % len(output_images)
-        st.markdown('</div>', unsafe_allow_html=True)
 
     with col2:
-        st.markdown('<div class="image-container">', unsafe_allow_html=True)
         name, path = output_images[current_image_index]
         st.image(Image.open(path), caption=name, width=500)
-        st.markdown('</div>', unsafe_allow_html=True)
 
     with col3:
-        st.markdown('<div class="button-container">', unsafe_allow_html=True)
         if st.button("Next"):
             current_image_index = (current_image_index + 1) % len(output_images)
-        st.markdown('</div>', unsafe_allow_html=True)
 
     st.session_state['current_image_index'] = current_image_index
     st.markdown("</div>", unsafe_allow_html=True)
