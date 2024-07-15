@@ -9,116 +9,10 @@ import time
 
 st.set_page_config(page_title="DesignerHub", layout="wide")
 
-st.markdown("""
-<style>
-    .stApp {
-        background-color: #FFFFFF;
-    }
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        background: #29303E;
-        color: #F13AB1;
-        padding: 10px 10px;
-        display: flex;
-        align-items: center;
-        z-index: 1000;
-    }
-    .center-title {
-        text-align: center;
-        font-size: 36px;
-        font-weight: bold;
-        margin: 0;
-        color: #29303E;
-    }
-    .header .title {
-        font-size: 40px; /* Adjust font size */
-        font-weight: bold;
-        color: #F13AB1;
-        margin-right: auto;
-    }
-    .stButton>button {
-        background-color: #F13AB1;
-        color: white;
-        font-weight: bold;
-        border: none;
-        border-radius: 4px;
-        padding: 0.5rem 1rem;
-        transition: all 0.3s;
-    }
-    .stButton>button:hover {
-        background-color: #FD913C;
-    }
-            .button-container {
-        display: flex;
-        justify-content: flex-end; /* Aligns the button to the right */
-    }
-    .stSelectbox {
-        border-radius: 4px;
-    }
-            .carousel-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-    .lorem-ipsum {
-        background-color: #f0f0f0;
-        padding: 20px;
-        margin: 20px 0;
-        color: #29303E;
-    }
-    .stImage {
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-.carousel-container .stImage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+def load_css():
+    with open("style.css") as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-.carousel-container img {
-    max-width: 100%;
-    height: auto;
-}
-            .carousel-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-.stButton > button {
-    height: 100%;
-    width: 100%;
-}
-    .gallery-image {
-        transition: transform 0.3s ease-in-out;
-    }
-    .gallery-image:hover {
-        transform: scale(1.05);
-    }
-    .color-strip {
-        height: 5px;
-        background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E);
-        margin: 20px 0;
-    }
-    .footer {
-        text-align: center;
-        padding: 20px;
-        color: #29303E;
-        font-weight: 300;
-    }
-            .upload-label {
-    color: black; 
-    text-align: center;
-}
-</style>
-""", unsafe_allow_html=True)
 st.write("")
 
 if 'last_run_time' not in st.session_state:
@@ -142,6 +36,7 @@ def perform_style_transfer(_content_tensor, _style_tensor, num_steps=500):
     return style_transfer.enhance_silhouette(output_c, _content_tensor)
 
 def main():
+    load_css()
 
     st.markdown('<h1 class="center-title" style="font-size: 40px;">DESIGNER HUB</h1>', unsafe_allow_html=True)
 
@@ -193,7 +88,7 @@ def main():
 
     st.session_state['current_image_index'] = current_image_index
     st.markdown("</div>", unsafe_allow_html=True)
-    
+
     st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
 
 

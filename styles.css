@@ -1,0 +1,187 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: #29303e;
+  background-color: #f8f8f8;
+}
+
+.stApp {
+  background-color: #ffffff;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #20242a;
+  color: #ffffff;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header .title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff3f6c;
+  text-decoration: none;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+}
+
+.nav-item {
+  margin-left: 25px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-item:hover {
+  color: #ff3f6c;
+  transform: translateY(-2px);
+}
+
+.content {
+  margin-top: 80px;
+  padding: 0 16px;
+}
+
+h1,
+.center-title {
+  color: #ff3f6c;
+  font-size: 2.5em;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+  color: #20242a;
+  font-size: 1.8em;
+  font-weight: 400;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.feature-box {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.feature-title {
+  color: #ff3f6c;
+  font-size: 1.4em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.feature-description {
+  color: #20242a;
+  font-size: 1em;
+  line-height: 1.6;
+}
+
+.lorem-ipsum {
+  background-color: #f5f5f6;
+  padding: 20px;
+  margin: 20px 0;
+  color: #20242a;
+  border-radius: 8px;
+}
+
+.stButton > button {
+  background: linear-gradient(to right, #ff3f6c, #ff527b);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 24px;
+  margin: 10px auto;
+  display: block;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.stButton > button:hover {
+  background: linear-gradient(to right, #ff527b, #ff3f6c);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 63, 108, 0.3);
+}
+
+.upload-label {
+  color: #20242a;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.color-strip {
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    #ff3f6c,
+    #ff527b,
+    #ff6781,
+    #ff7c97,
+    #ff91ad
+  );
+  margin: 30px 0;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #20242a;
+  color: #ffffff;
+  font-weight: 300;
+}
+
+.stSelectbox {
+  border-radius: 4px;
+}
+
+.carousel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.stImage {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.stImage:hover {
+  transform: scale(1.05);
+}
+
+.gallery-image {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+}
+
+.gallery-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}

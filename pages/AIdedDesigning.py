@@ -6,73 +6,10 @@ from io import BytesIO
 
 #OpenAI API key from Streamlit secrets
 client = OpenAI(api_key=st.secrets["openai"]["image-gen-key"])
-st.set_page_config(page_title="DesignerHub", layout="wide")
 
-st.markdown("""
-<style>
-    .stApp {
-        background-color: #FFFFFF;
-    }
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        background: #29303E;
-        color: #F13AB1;
-        padding: 10px 10px;
-        display: flex;
-        align-items: center;
-        z-index: 1000;
-    }
-    .center-title {
-        text-align: center;
-        font-size: 36px;
-        font-weight: bold;
-        margin: 0;
-        color: #29303E;
-    }
-    .header .title {
-        font-size: 40px;
-        font-weight: bold;
-        color: #F13AB1;
-        margin-right: auto;
-    }
-    .stButton>button {
-        background-color: #F13AB1;
-        color: white;
-        font-weight: bold;
-        border: none;
-        border-radius: 4px;
-        padding: 0.5rem 1rem;
-        transition: all 0.3s;
-    }
-    .stButton>button:hover {
-        background-color: #29303E;
-    }
-    .color-strip {
-        height: 5px;
-        background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E);
-        margin: 20px 0;
-    }
-    .footer {
-        text-align: center;
-        padding: 20px;
-        color: #29303E;
-        font-weight: 300;
-    }
-    .lorem-ipsum {
-    background-color: #f0f0f0;
-    padding: 20px;
-    margin: 20px 0;
-    color: #29303E;
-}
-            .upload-label {
-    color: black; 
-    text-align: center;
-}
-</style>
-""", unsafe_allow_html=True)
+def load_css():
+    with open("style.css") as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 def generate_image(prompt):
     try:
@@ -105,6 +42,8 @@ def create_image_variations(image):
         return None
 
 def main():
+    load_css()
+    
     st.markdown("""
     <div class="header">
         <div class="title">StyleUp</div>

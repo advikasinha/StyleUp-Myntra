@@ -6,84 +6,13 @@ import utils
 
 st.set_page_config(page_title="DesignerHub", layout="wide")
 
+def load_css():
+    with open("style.css") as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
 def main():
-    st.markdown("""
-    <style>
-.stApp {
-    background-color: #FFFFFF;
-}
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: #29303E;
-    color: #F13AB1;
-    padding: 20px 30px; /* Adjust padding as needed */
-    display: flex;
-    align-items: center;
-    z-index: 1000;
-}
-
-.header .title {
-    font-size: 18; /* Adjust font size */
-    font-weight: bold;
-    color: #F13AB1;
-    margin-right: auto; /* Align title to the left */
-}
-
-
-.content {
-    margin-top: 10px;
-    padding: 0 16px;
-}
-.center-title {
-    text-align: center;
-    font-size: 36px;
-    font-weight: bold;
-    margin: 0;
-    color: #29303E;
-}
-.lorem-ipsum {
-    background-color: #f0f0f0;
-    padding: 20px;
-    margin: 20px 0;
-    color: #29303E;
-}
-.stButton>button {
-    background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E);
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 25px; /* Adjust border radius for a rounded button */
-    padding: 16px 32px; /* Adjust padding for button size */
-    margin: 0 auto; /* Center the button */
-    display: block; /* Ensure it's a block element for margin auto to work */
-    font-size: 18px; /* Adjust font size */
-    cursor: pointer;
-                
-}
-.stButton>button:hover {
-    background-color: #FD913C;
-}
-.upload-label {
-    color: black; 
-    text-align: center;
-}
-.color-strip {
-    height: 5px;
-    background: linear-gradient(to right, #F13AB1, #E72744, #FD913C, #F05524, #29303E);
-    margin: 20px 0; /* Adjust margin to add spacing around the color strip */
-}
-        .footer {
-        text-align: center;
-        padding: 20px;
-        color: #29303E;
-        font-weight: 300;
-    }
-</style>
-    """, unsafe_allow_html=True)
-
+    load_css()
+    
     st.markdown(
 """
 <div class="header">
