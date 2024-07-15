@@ -185,7 +185,7 @@ def main():
 
     with col2:
         name, path = output_images[current_image_index]
-        st.image(Image.open(path), caption=name, width=500)
+        st.image(Image.open(path), caption=name, width=500, use_column_width=False)
 
     with col3:
         if st.button("Next"):
