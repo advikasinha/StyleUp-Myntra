@@ -108,7 +108,7 @@ def main():
                             image_container.image(img, width=500, use_column_width=False)
                         time.sleep(2)
                 
-                st.write("Slideshow finished.")
+                st.markdown('<span class="upload-label">Slideshow finished</span>', unsafe_allow_html=True)
             else:
                 st.write("No images found in the DALL-E-gen folder.")
 
