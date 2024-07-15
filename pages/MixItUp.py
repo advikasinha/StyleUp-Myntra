@@ -75,32 +75,27 @@ st.markdown("""
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-.carousel-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 2rem;
-}
-
-.carousel {
+.carousel-container .stImage {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 800px;
-    width: 100%;
+    justify-content: center;
 }
 
-.carousel img {
+.carousel-container img {
     max-width: 100%;
     height: auto;
 }
-
-.carousel-buttons {
+            .carousel-container {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.stButton > button {
+    height: 100%;
     width: 100%;
-    margin-top: 1rem;
 }
     .gallery-image {
         transition: transform 0.3s ease-in-out;
@@ -177,23 +172,27 @@ def main():
     st.markdown('<h3 style="color: #F05524; text-align: center; font-size: 24px;">Inspiration Gallery</h3>', unsafe_allow_html=True)
     st.markdown("<div class='carousel-container'><div class='carousel'>", unsafe_allow_html=True)
 
+    st.markdown('<div class="carousel-container">', unsafe_allow_html=True)
+
     output_images = sorted(list(pre_generated_outputs.items()))
     current_image_index = st.session_state.get('current_image_index', 0)
 
-    name, path = output_images[current_image_index]
-    st.image(Image.open(path), caption=name, use_column_width=500)
+    col1, col2, col3 = st.columns([1, 3, 1])  # Adjust the ratios as needed
 
-    col1, col2 = st.columns([1, 1])
     with col1:
         if st.button("Previous"):
             current_image_index = (current_image_index - 1) % len(output_images)
+
     with col2:
+        name, path = output_images[current_image_index]
+        st.image(Image.open(path), caption=name, width=500)
+
+    with col3:
         if st.button("Next"):
             current_image_index = (current_image_index + 1) % len(output_images)
 
     st.session_state['current_image_index'] = current_image_index
-    st.markdown("</div></div>", unsafe_allow_html=True)
-
+    st.markdown("</div>", unsafe_allow_html=True)
     st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
@@ -214,7 +213,7 @@ def main():
         if style_file:
             style_path = styles[style_file]
             style_img = Image.open(style_path).convert('RGB')
-            st.image(style_img, caption=style_file, use_column_width=300, output_format="JPEG")
+            st.image(style_img, caption=style_file, use_column_width=200, output_format="JPEG")
 
     if st.button("Design It!", key="design_button", help="Click to design your image"):
         if content_file and style_file:
