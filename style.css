@@ -109,7 +109,7 @@ h3 {
 }
 
 .stButton > button {
-  background: linear-gradient(to right, #ff3f6c, #ff527b);
+  background: linear-gradient(to right, #ff3f6c, #f05524);
   color: white;
   font-weight: bold;
   border: none;
@@ -151,7 +151,6 @@ h3 {
 .footer {
   text-align: center;
   padding: 20px;
-  background-color: #20242a;
   color: #ffffff;
   font-weight: 300;
 }

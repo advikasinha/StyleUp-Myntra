@@ -113,7 +113,7 @@ def main():
             style_img = Image.open(style_path).convert('RGB')
             st.image(style_img, caption=style_file, use_column_width=True, output_format="JPEG")
 
-    if st.button("Design It!", key="design_button", help="Click to design your image"):
+    if st.button("Design It!", help="Click to design your image"):
         if content_file and style_file:
             with st.spinner("Designing your image..."):
                 try:

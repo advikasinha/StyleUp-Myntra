@@ -50,7 +50,7 @@ def main():
             st.image(style_file, caption='Uploaded Style', width=image_width)
 
     if content_file and style_file:
-        if st.button("Design It!", key="design_button", help="Click to design your image"):
+        if st.button("Design It!", help="Click to design your image"):
             with st.spinner("Designing your image..."):
                 try:
                     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

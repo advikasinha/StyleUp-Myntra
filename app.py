@@ -125,11 +125,6 @@ st.markdown("""
 st.markdown("""
 <div class="header">
     <span class="logo">StyleUp</span>
-    <a href="#" class="nav-item">View Catalogue</a>
-    <a href="#" class="nav-item">Look Of The Week</a>
-    <a href="#" class="nav-item">Trending</a>
-    <a href="#" class="nav-item">My Designs</a>
-    <a href="#" class="nav-item">Help</a>
 </div>
 """, unsafe_allow_html=True)
 

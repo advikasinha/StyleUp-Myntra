@@ -102,7 +102,7 @@ def main():
                     for i, var_url in enumerate(variations):
                         cols[i % 2].image(var_url, caption=f"Variation {i+1}", use_column_width=True)
 
-    st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
+
     st.markdown("""
 <div class="footer">
     DesignerHub: Empowering fashion designers with cutting-edge AI tools.
