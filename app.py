@@ -2,7 +2,6 @@ import streamlit as st
 
 st.set_page_config(page_title="DesignerHub", layout="wide")
 
-# Custom CSS
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');

@@ -9,7 +9,6 @@ import time
 
 st.set_page_config(page_title="DesignerHub", layout="wide")
 
-# Custom CSS
 st.markdown("""
 <style>
     .stApp {
@@ -168,7 +167,8 @@ def main():
     styles = get_image_list("styles")
     pre_generated_outputs = get_image_list("outputs")
 
-    # Carousel for pre-generated outputs
+
+
     st.markdown('<h3 style="color: #F05524; text-align: center; font-size: 24px;">Inspiration Gallery</h3>', unsafe_allow_html=True)
     st.markdown("<div class='carousel-container'><div class='carousel'>", unsafe_allow_html=True)
 
@@ -177,7 +177,7 @@ def main():
     output_images = sorted(list(pre_generated_outputs.items()))
     current_image_index = st.session_state.get('current_image_index', 0)
 
-    col1, col2, col3 = st.columns([1, 3, 1])  # Adjust the ratios as needed
+    col1, col2, col3 = st.columns([1, 3, 1]) 
 
     with col1:
         if st.button("Previous"):
@@ -193,7 +193,10 @@ def main():
 
     st.session_state['current_image_index'] = current_image_index
     st.markdown("</div>", unsafe_allow_html=True)
+    
     st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
+
+
 
     col1, col2 = st.columns(2)
 

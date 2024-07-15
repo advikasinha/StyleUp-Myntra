@@ -7,7 +7,6 @@ import utils
 st.set_page_config(page_title="DesignerHub", layout="wide")
 
 def main():
-    # Custom CSS
     st.markdown("""
     <style>
 .stApp {
@@ -85,7 +84,6 @@ def main():
 </style>
     """, unsafe_allow_html=True)
 
-    # # # Header with Myntra logo image and StyleUp text
     st.markdown(
 """
 <div class="header">
@@ -94,12 +92,10 @@ def main():
 """, unsafe_allow_html=True)
     st.markdown('<h1 class="center-title" style="font-size: 40px;">DESIGNER HUB</h1>', unsafe_allow_html=True)
 
-    # Color strip
     st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
 
     st.markdown('<h3 style="color: #F13AB1; text-align: center; font-size: 28px;">Create Your Own Designs</h2>', unsafe_allow_html=True)
 
-    # Lorem Ipsum block
     st.markdown("""
     <div class="lorem-ipsum">
         <p style="font-size: 16px; line-height: 1.6; color: #333;">Welcome to <strong>Designer Hub</strong>, your ultimate playground on Myntra! Designed for both budding designers and fashion enthusiasts, this platform eliminates the need for traditional mockups.</p>
@@ -110,12 +106,12 @@ def main():
 
     st.write("")
 
-    # File uploaders
+
     col1, col2 = st.columns(2)
     image_width=300
     with col1:
         st.markdown('<span class="upload-label">Upload your Silhouette</span>', unsafe_allow_html=True)
-        content_file = st.file_uploader('', type=["png", "jpg", "jpeg"], key='content-file')  # Empty string for label
+        content_file = st.file_uploader('', type=["png", "jpg", "jpeg"], key='content-file')  
         if content_file is not None:
             st.image(content_file, caption='Uploaded Silhouette', width=image_width)
     with col2:

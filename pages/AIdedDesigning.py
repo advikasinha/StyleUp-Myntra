@@ -4,11 +4,10 @@ from PIL import Image
 import requests
 from io import BytesIO
 
-# Set your OpenAI API key from Streamlit secrets
+#OpenAI API key from Streamlit secrets
 client = OpenAI(api_key=st.secrets["openai"]["image-gen-key"])
 st.set_page_config(page_title="DesignerHub", layout="wide")
 
-# Custom CSS (same as previous pages)
 st.markdown("""
 <style>
     .stApp {
@@ -88,7 +87,7 @@ def generate_image(prompt):
     except Exception as e:
         error_message = str(e)
         if "billing_hard_limit_reached" in error_message:
-            st.error("We've reached our daily limit for image generation. Please try again tomorrow or contact support.")
+            st.error('<span style="color:black">We\'ve reached our daily limit for image generation.</span>', unsafe_allow_html=True)
         else:
             st.error(f"An error occurred: {error_message}")
         return None
