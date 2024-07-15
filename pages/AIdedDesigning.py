@@ -89,33 +89,21 @@ def main():
         prompt=f'Fashion illustration of {pattern.lower()} {color} colored {cloth_type.lower()}, high quality, detailed design, fashion illustration, abstract, professional, vibrant colors, artistic style, elegant, flowing fabric, intricate details, beautiful, modern, colorful, fashion design, stylish, high-res, intricate patterns, fashion illustration style, vibrant lighting'
         image_url = generate_image(prompt)
         if image_url is None:
-            st.markdown("""<div class='lorem-ipsum'> <p style="font-size: 16px; line-height: 1.6; color: #333;">Explore our previous creations by the similar prompt meanwhile: </p>  
+            st.markdown("""<div class='lorem-ipsum'> <p style="font-size: 16px; line-height: 1.6; color: #333;">Explore our previous creations by the s prompt meanwhile: </p>  
                 </div>""", unsafe_allow_html=True)
-                
+
             current_dir = os.path.dirname(os.path.abspath(__file__))
             image_folder = os.path.join(current_dir, "DALL-E-gen")
             image_files = [f for f in os.listdir(image_folder) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
             
             if image_files:
-                col1, col2, col3 = st.columns([1, 3, 1])
-                with col2:
-                    image_container = st.empty()
-                
+                image_container = st.empty()
                 while True:
                     for image_file in image_files:
                         image_path = os.path.join(image_folder, image_file)
                         img = Image.open(image_path)
-                        
-                        # Calculate height to maintain aspect ratio
-                        width_percent = (500 / float(img.size[0]))
-                        height = int((float(img.size[1]) * float(width_percent)))
-                        
-                        # Resize image width to 500px while maintaining aspect ratio
-                        img = img.resize((500, height), Image.LANCZOS)
-                        
-                        # Display the image
-                        image_container.image(img, use_column_width=False)
-                        time.sleep(3)  # Display each image for 3 seconds
+                        image_container.image(img, width =300, use_column_width=False)
+                        time.sleep(3) 
             else:
                 st.write("No images found in the DALL-E-gen folder.")
 
