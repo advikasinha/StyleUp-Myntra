@@ -86,7 +86,11 @@ def generate_image(prompt):
         image_url = response.data[0].url
         return image_url
     except Exception as e:
-        st.error(f"An error occurred: {str(e)}")
+        error_message = str(e)
+        if "billing_hard_limit_reached" in error_message:
+            st.error("We've reached our daily limit for image generation. Please try again tomorrow or contact support.")
+        else:
+            st.error(f"An error occurred: {error_message}")
         return None
 
 def create_image_variations(image):
@@ -111,12 +115,12 @@ def main():
     st.markdown('<h1 class="center-title" style="font-size: 40px;">DESIGNER HUB</h1>', unsafe_allow_html=True)
     st.markdown('<div class="color-strip"></div>', unsafe_allow_html=True)
 
-    st.markdown('<h3 style="color: #F13AB1; text-align: center; font-size: 28px;">AIded Designing</h2>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: #F13AB1; text-align: center; font-size: 28px;">AI-ded Designing</h2>', unsafe_allow_html=True)
 
     st.markdown("""
     <div class="lorem-ipsum">
         <p style="font-size: 16px; line-height: 1.6; color: #333;">Welcome to <strong>Designer Hub</strong>, your ultimate playground on Myntra! Designed for both budding designers and fashion enthusiasts, this platform eliminates the need for traditional mockups.</p>
-        <p style="font-size: 16px; line-height: 1.6; color: #333;"><strong><em>AIded Designing</em></strong> lets DALL-E generate a unique look, allowing you to explore the possibilities of AI-generated fashion and find inspiration for your next design!</p>
+        <p style="font-size: 16px; line-height: 1.6; color: #333;"><strong><em>AI-ded Designing</em></strong> lets DALL-E generate a unique look, allowing you to explore the possibilities of AI-generated fashion and find inspiration for your next design!</p>
         <p style="font-size: 16px; line-height: 1.6; color: #333;">Make your selections to bring your vision to life. View the generated design and create variations, exploring multiple renditions of your unique style.</p>
         <p style="font-size: 16px; line-height: 1.6; color: #29303E; text-align: center;">Craft stunning looks with the power of AI magic!</p>
     </div>
