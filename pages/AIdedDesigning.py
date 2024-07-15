@@ -6,7 +6,7 @@ import requests
 from io import BytesIO
 
 # Set your OpenAI API key
-openai.api_key = st.secrets["image-gen-key"]
+openai.api_key = st.secrets["openai"]["image-gen-key"]
 
 # Custom CSS (same as previous pages)
 st.markdown("""
