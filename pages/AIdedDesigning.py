@@ -89,7 +89,7 @@ def main():
         prompt=f'Fashion illustration of {pattern.lower()} {color} colored {cloth_type.lower()}, high quality, detailed design, fashion illustration, abstract, professional, vibrant colors, artistic style, elegant, flowing fabric, intricate details, beautiful, modern, colorful, fashion design, stylish, high-res, intricate patterns, fashion illustration style, vibrant lighting'
         image_url = generate_image(prompt)
         if image_url is None:
-            st.markdown("""<div class='lorem-ipsum'> <p style="font-size: 16px; line-height: 1.6; color: #333;">Explore our previous creations by the same prompt meanwhile: </p>  
+            st.markdown("""<div class='lorem-ipsum'> <p style="font-size: 16px; line-height: 1.6; color: #333;">Explore our previous creations by the similar prompts meanwhile: </p>  
                 </div>""", unsafe_allow_html=True)
                 
             # Get the current script's directory
@@ -107,7 +107,7 @@ def main():
                     for image_file in image_files:
                         image_path = os.path.join(image_folder, image_file)
                         img = Image.open(image_path)
-                        img.thumbnail((500, 500))  # Resize image to 500px max
+                        img.thumbnail((200, 200))  # Resize image to 500px max
                         image_container.image(img, use_column_width=True)
                         time.sleep(3)  # Display each image for 3 seconds
             else:
