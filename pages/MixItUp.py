@@ -181,7 +181,7 @@ def main():
     current_image_index = st.session_state.get('current_image_index', 0)
 
     name, path = output_images[current_image_index]
-    st.image(Image.open(path), caption=name, use_column_width=True)
+    st.image(Image.open(path), caption=name, use_column_width=500)
 
     col1, col2 = st.columns([1, 1])
     with col1:
