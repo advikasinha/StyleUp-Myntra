@@ -113,7 +113,6 @@ def get_image_list(folder):
     images = [f for f in os.listdir(image_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
     return {os.path.splitext(f)[0]: os.path.join(image_dir, f) for f in images}
 
-@st.cache_resource
 def perform_style_transfer(_content_tensor, _style_tensor, num_steps=500):
     output_c = style_transfer.run_style_transfer(_content_tensor, _style_tensor, num_steps=num_steps)
     return style_transfer.enhance_silhouette(output_c, _content_tensor)
@@ -191,17 +190,18 @@ def main():
             st.image(style_img, caption=style_file, width=400, output_format="JPEG")
 
     # Style Transfer Button
+    button_key = f"design_button_{content_file}_{style_file}"
+
     if silhouette_options and style_options:
-        if st.button("Design It!", key="design_button", help="Click to design your image"):
+        if st.button("Design It!", key=button_key):
             with st.spinner("Designing your image..."):
                 try:
-                    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+                    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")                    
                     content_tensor, style_tensor = utils2.load_images(content_path, style_path, device)
-
-                    if content_tensor is not None and style_tensor is not None:
-                        output = perform_style_transfer(content_tensor, style_tensor)
-                        output_pil = utils2.tensor_to_pil(output)
-                        st.image(output_pil, caption="Your Styled Design", width=600, use_column_width=False, output_format="PNG")
+                    
+                    output = perform_style_transfer(content_tensor, style_tensor)
+                    output_pil = utils2.tensor_to_pil(output)
+                    st.image(output_pil, caption="Your Styled Design", width=600, use_column_width=False, output_format="PNG")
                 
                 except Exception as e:
                     st.error(f"An error occurred during the style transfer process: {str(e)}")
