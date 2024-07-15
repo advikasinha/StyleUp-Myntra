@@ -8,7 +8,7 @@ import os
 
 st.write(f"PyTorch version: {torch.__version__}")
 st.write(f"Torchvision version: {torchvision.__version__}")
-st.write(f"PIL version: {PIL.__version__}")
+# st.write(f"PIL version: {PIL.__version__}")
 st.write(f"CUDA available: {torch.cuda.is_available()}")
 
 # Custom CSS
