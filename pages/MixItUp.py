@@ -206,6 +206,7 @@ def main():
     silhouettes = get_image_list("silhouettes")
     styles = get_image_list("styles")
     pre_generated_outputs = get_image_list("outputs")
+    output_images = sorted(list(pre_generated_outputs.items()))
 
     # Carousel for pre-generated outputs
     if 'current_image_index' not in st.session_state:
@@ -215,7 +216,7 @@ def main():
 
     st.markdown('<div class="carousel-container">', unsafe_allow_html=True)
 
-    for i, (name, path) in enumerate(pre_generated_outputs):
+    for i, (name, path) in enumerate(output_images):
         active_class = 'active' if i == st.session_state.current_image_index else ''
         st.markdown(f'<div class="carousel-item {active_class}">', unsafe_allow_html=True)
         st.image(Image.open(path), caption=name, use_column_width=True)
@@ -225,7 +226,7 @@ def main():
     st.markdown('<a class="carousel-control carousel-control-next" href="#" role="button" id="next">❯</a>', unsafe_allow_html=True)
 
     st.markdown('<div class="carousel-indicators">', unsafe_allow_html=True)
-    for i in range(len(pre_generated_outputs)):
+    for i in range(len(output_images)):
         active_class = 'active' if i == st.session_state.current_image_index else ''
         st.markdown(f'<div class="carousel-indicator {active_class}" data-index="{i}"></div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
