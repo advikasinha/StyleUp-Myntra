@@ -112,6 +112,11 @@ def get_image_list(folder):
     images = [f for f in os.listdir(image_dir) if f.lower().endswith(('.png', '.jpg', '.jpeg'))]
     return {os.path.splitext(f)[0]: os.path.join(image_dir, f) for f in images}
 
+@st.cache_data
+def perform_style_transfer(content_tensor, style_tensor, num_steps=500):
+    output_c = style_transfer.run_style_transfer(content_tensor, style_tensor, num_steps=num_steps)
+    return style_transfer.enhance_silhouette(output_c, content_tensor)
+
 def main():
 
     st.markdown('<h1 class="center-title" style="font-size: 40px;">DESIGNER HUB</h1>', unsafe_allow_html=True)
@@ -193,20 +198,18 @@ def main():
                 try:
                     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
                     
-                    # Load images into tensors
                     content_tensor, style_tensor = utils2.load_images(content_img, style_img, device)
                     
                     if content_tensor is None or style_tensor is None:
                         st.error("Failed to load content or style image into tensors.")
                     else:
-                        # Perform style transfer
-                        output_c = style_transfer.run_style_transfer(content_tensor, style_tensor, num_steps=500)
-                        output = style_transfer.enhance_silhouette(output_c, content_tensor)
+                        output = perform_style_transfer(content_tensor, style_tensor)
                         output_pil = utils2.tensor_to_pil(output)
                         st.image(output_pil, caption="Your Styled Design", width=600, use_column_width=False, output_format="PNG")
                 
                 except Exception as e:
                     st.error(f"An error occurred during the style transfer process: {str(e)}")
+                    st.exception(e)
 
     st.markdown("""
 <div class="footer">
