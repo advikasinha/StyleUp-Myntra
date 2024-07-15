@@ -25,8 +25,8 @@ def generate_image(prompt):
     except Exception as e:
         error_message = str(e)
         if "billing_hard_limit_reached" in error_message:
-            st.markdown('<div style="background-color: #FF5733; padding: 10px; border-radius: 5px;">'
-                        '<p style="color: white;">We\'ve reached our daily limit for image generation.</p>'
+            st.markdown('<div style="background-color: #29303e; padding: 10px; border-radius: 5px;">'
+                        '<p style="color: f13ab1; text-align: center;">We\'ve reached our daily limit for image generation.</p>'
                         '</div>', unsafe_allow_html=True)
         else:
             st.error(f"An error occurred: {error_message}")
