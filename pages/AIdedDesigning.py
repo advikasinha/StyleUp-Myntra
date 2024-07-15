@@ -102,8 +102,9 @@ def main():
                     for image_file in image_files:
                         image_path = os.path.join(image_folder, image_file)
                         img = Image.open(image_path)
+                        img.thumbnail((200, 200))  # Resize image to 500px max
                         image_container.image(img, width =300, use_column_width=False)
-                        time.sleep(3) 
+                        time.sleep(3)  # Display each image for 3 seconds
             else:
                 st.write("No images found in the DALL-E-gen folder.")
 
