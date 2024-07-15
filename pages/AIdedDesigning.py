@@ -1,11 +1,11 @@
 import streamlit as st
-import openai
+from openai import OpenAI
 from PIL import Image
 import requests
 from io import BytesIO
 
 # Set your OpenAI API key from Streamlit secrets
-openai.api_key = st.secrets["openai"]["image-gen-key"]
+client = OpenAI(api_key=st.secrets["openai"]["image-gen-key"])
 st.set_page_config(page_title="DesignerHub", layout="wide")
 
 # Custom CSS (same as previous pages)
@@ -49,7 +49,7 @@ st.markdown("""
         transition: all 0.3s;
     }
     .stButton>button:hover {
-        background-color: #FD913C;
+        background-color: #29303E;
     }
     .color-strip {
         height: 5px;
@@ -77,12 +77,13 @@ st.markdown("""
 
 def generate_image(prompt):
     try:
-        response = openai.Image.create(
+        response = client.images.generate(
             model="dall-e-3",
             prompt=prompt,
-            n=1
+            n=1,
+            size="1024x1024"
         )
-        image_url = response['output']['url']
+        image_url = response.data[0].url
         return image_url
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
@@ -90,12 +91,12 @@ def generate_image(prompt):
 
 def create_image_variations(image):
     try:
-        response = openai.Image.create_variation(
-            model="dall-e-3",
+        response = client.images.create_variation(
             image=image,
-            n=4
+            n=4,
+            size="1024x1024"
         )
-        return [variation['output']['url'] for variation in response['data']]
+        return [variation.url for variation in response.data]
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
         return None
@@ -129,7 +130,7 @@ def main():
         st.markdown('<span class="upload-label">Select clothing type</span>', unsafe_allow_html=True)
         cloth_type = st.selectbox("", ["T-shirt", "Dress", "Pants", "Jacket", "Skirt"])
     with col2:
-        st.markdown('<span class="upload-label">Select clothing type</span>', unsafe_allow_html=True)
+        st.markdown('<span class="upload-label">Select color</span>', unsafe_allow_html=True)
         color = st.color_picker("", "#000000")
     with col3:
         st.markdown('<span class="upload-label">Select pattern</span>', unsafe_allow_html=True)
@@ -140,7 +141,6 @@ def main():
     if st.button("Generate Design"):
         prompt = f"A {color} {pattern.lower()} {cloth_type.lower()} design, {custom_specification}, fashion illustration style"
         image_url = generate_image(prompt)
-
 
         if image_url:
             st.image(image_url, caption="Generated Design", use_column_width=True)
